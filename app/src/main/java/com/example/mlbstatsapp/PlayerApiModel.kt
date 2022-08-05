@@ -1,6 +1,6 @@
 package com.example.mlbstatsapp
 
-data class Player(
+data class PlayerApiModel(
     val position:String,
     val birth_country:String,
     val weight:String,

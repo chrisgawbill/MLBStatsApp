@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,7 +46,7 @@ class HomeFragment : Fragment() {
         playerSearchText = view.findViewById(R.id.searchPlayerText)
         playerSearchBtn.setOnClickListener(View.OnClickListener {
             var playerSearchClickParam = playerSearchText.text.toString()
-            playerSearchClick(playerSearchClickParam)
+            playerSearchClick(playerSearchClickParam, view)
         })
         return view
     }
@@ -67,8 +70,10 @@ class HomeFragment : Fragment() {
                 }
             }
     }
-    fun playerSearchClick(playerSearchParam:String){
+    fun playerSearchClick(playerSearchParam:String, view:View){
         var homeView:HomeViewModel = HomeViewModel()
-        homeView.getPlayerSearchList(playerSearchParam)
+        homeView.setPlayerSearchTerm(playerSearchParam)
+
+        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_playerSearchResultsFragment)
     }
 }

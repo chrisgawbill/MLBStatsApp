@@ -11,12 +11,12 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_playerSearchListFragment"
-            app:destination="@id/playerSearchListFragment" />
+            android:id="@+id/action_homeFragment_to_playerSearchResultsFragment"
+            app:destination="@id/playerSearchResultsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/playerSearchListFragment"
-        android:name="com.example.mlbstatsapp.PlayerSearchListFragment"
-        android:label="fragment_player_search_list"
-        tools:layout="@layout/fragment_player_search_list" />
+        android:id="@+id/playerSearchResultsFragment"
+        android:name="com.example.mlbstatsapp.PlayerSearchResultsFragment"
+        android:label="fragment_player_search_results"
+        tools:layout="@layout/fragment_player_search_results" />
 </navigation>
