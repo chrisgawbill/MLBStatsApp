@@ -3,6 +3,11 @@ package com.example.mlbstatsapp;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
+import androidx.room.Room;
+
+import com.example.mlbstatsapp.database.AppDatabase;
+import com.example.mlbstatsapp.database.Team;
+import com.example.mlbstatsapp.database.TeamDao;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +20,9 @@ public class LoadData {
     private int year;
     private String teamsListApi;
     private String teamStatsApi;
+
+    private TeamDao teamDao;
+
 
     private LoadData(){
 
@@ -35,7 +43,19 @@ public class LoadData {
         return teamsListApi;
     }
 
-    public void updateStats(){
+    public void updateTeamStats(Team team, String name){
+
+        if(teamDao.hasTeam(name)){
+
+            teamDao.updateTeam(team);
+
+        }
+    }
+
+    public void insertTeam(Team team){
+
+        teamDao.insertTeam(team);
+
 
     }
 
