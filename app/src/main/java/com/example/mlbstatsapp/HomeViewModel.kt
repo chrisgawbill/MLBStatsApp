@@ -32,11 +32,11 @@ class HomeViewModel(): ViewModel() {
     fun getPlayerSearchList(){
         val mlbApi = RetrofitHelper.getInstance().create(MlbApi::class.java)
         Log.d(HomeViewModel::class.java.simpleName, playerSearch)
-        val sportCode = "%27mlb%27"
-        val active = "%27Y%27"
-        val name = "%27Harper%25%27"
-        val call = mlbApi.getPlayerSearchResults(sportCode, active, name)
-        //val call = mlbApi.getPlayerSearchResults()
+        //val sportCode = "%27mlb%27"
+        //val active = "%27Y%27"
+        //val name = "%27Harper%25%27"
+        //val call = mlbApi.getPlayerSearchResults(sportCode, active, name)
+        val call = mlbApi.getPlayerSearchResults()
         call.enqueue(object:retrofit2.Callback<ApiModel>{
             override fun onFailure(call: Call<ApiModel>, t:Throwable){
                 Log.d(HomeViewModel::class.java.simpleName, "API CALLED FAILED")
