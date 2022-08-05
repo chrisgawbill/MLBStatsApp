@@ -88,7 +88,7 @@ class PlayerSearchResultsFragment : Fragment() {
         } ?: throw Exception("Invalid Activity")
         sharedViewModel.playerSearchTerm.observe(viewLifecycleOwner, Observer {
              searchTerm = sharedViewModel.playerSearchTerm.value.toString()
-            homeView.getPlayerSearchResultsDataObserver().observe(viewLifecycleOwner,Observer<PlayerList>{
+             homeView.getPlayerSearchResultsDataObserver().observe(viewLifecycleOwner,Observer<PlayerList>{
                 if(it != null){
                     Log.d(PlayerSearchResultsFragment::class.java.simpleName, it.row.toString())
                     homeView.setAdapterData(it.row as ArrayList<PlayerApiModel>)
