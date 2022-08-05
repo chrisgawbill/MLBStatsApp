@@ -1,37 +1,48 @@
-package com.example.mlbstatsapp;
+package com.example.mlbstatsapp.database;
 
-public class Batter {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+@Entity
+public class Pitcher {
+
+    @PrimaryKey(autoGenerate = true)
     private int id;
+    @ColumnInfo(name= "first-name")
     private String firstName;
+    @ColumnInfo(name= "last-name")
     private String lastName;
+    @ColumnInfo(name= "hometown")
     private String hometown;
+    @ColumnInfo(name= "team")
     private String team;
+    @ColumnInfo(name= "bats")
     private String bats;
+    @ColumnInfo(name= "throws")
     private String handThrows;
-    private String position;
-    private int hr;
-    private int rbi;
-    private float ba;
+    @ColumnInfo(name= "era")
+    private float era;
+    @ColumnInfo(name= "wins")
+    private int wins;
+    @ColumnInfo(name= "losses")
+    private int losses;
 
-    public Batter(String firstName, String lastName, String hometown, String team, String bats, String handThrows, String position, int hr, int rbi, float ba) {
+    public Pitcher(String firstName, String lastName, String hometown, String team, String bats, String handThrows, float era, int wins, int losses) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.hometown = hometown;
         this.team = team;
         this.bats = bats;
         this.handThrows = handThrows;
-        this.position = position;
-        this.hr = hr;
-        this.rbi = rbi;
-        this.ba = ba;
+        this.era = era;
+        this.wins = wins;
+        this.losses = losses;
     }
 
     public int getId() {
         return id;
     }
-
-
 
     public String getFirstName() {
         return firstName;
@@ -81,35 +92,27 @@ public class Batter {
         this.handThrows = handThrows;
     }
 
-    public String getPosition() {
-        return position;
+    public float getEra() {
+        return era;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setEra(float era) {
+        this.era = era;
     }
 
-    public int getHr() {
-        return hr;
+    public int getWins() {
+        return wins;
     }
 
-    public void setHr(int hr) {
-        this.hr = hr;
+    public void setWins(int wins) {
+        this.wins = wins;
     }
 
-    public int getRbi() {
-        return rbi;
+    public int getLosses() {
+        return losses;
     }
 
-    public void setRbi(int rbi) {
-        this.rbi = rbi;
-    }
-
-    public float getBa() {
-        return ba;
-    }
-
-    public void setBa(float ba) {
-        this.ba = ba;
+    public void setLosses(int losses) {
+        this.losses = losses;
     }
 }

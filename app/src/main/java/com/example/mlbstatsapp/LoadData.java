@@ -31,6 +31,10 @@ public class LoadData {
         return single_instance;
     }
 
+    public String getTeamsListApi(){
+        return teamsListApi;
+    }
+
     public void updateStats(){
 
     }
