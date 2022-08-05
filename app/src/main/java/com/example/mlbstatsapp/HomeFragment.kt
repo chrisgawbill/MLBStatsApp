@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,6 +29,7 @@ class HomeFragment : Fragment() {
     private var param2: String? = null
     lateinit var playerSearchBtn:Button
     lateinit var playerSearchText:EditText
+    lateinit var sharedViewModel:HomePlayerSearchSharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +75,10 @@ class HomeFragment : Fragment() {
     }
     fun playerSearchClick(playerSearchParam:String, view:View){
         var homeView:HomeViewModel = HomeViewModel()
-        homeView.setPlayerSearchTerm(playerSearchParam)
+        sharedViewModel = activity?.run{
+            ViewModelProviders.of(this).get(HomePlayerSearchSharedViewModel::class.java)
+        }?: throw Exception("Invalid Activity")
+        sharedViewModel.playerSearchTerm.value = playerSearchParam
 
         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_playerSearchResultsFragment)
     }

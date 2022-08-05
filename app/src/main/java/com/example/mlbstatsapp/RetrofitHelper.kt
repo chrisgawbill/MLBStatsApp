@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object RetrofitHelper {
-    val baseUrl = "http://lookup-service-prod.mlb.com"
+    val baseUrl = "http://lookup-service-prod.mlb.com/json/"
     var gson = GsonBuilder()
         .setLenient()
         .create()

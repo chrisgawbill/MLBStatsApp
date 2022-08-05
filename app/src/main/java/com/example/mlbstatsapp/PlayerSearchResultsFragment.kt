@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mlbstatsapp.databinding.FragmentPlayerSearchResultsBinding
@@ -27,6 +28,9 @@ class PlayerSearchResultsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var sharedViewModel:HomePlayerSearchSharedViewModel
+    lateinit var searchTerm:String
 
     lateinit var playerSearchResultsRecycler:RecyclerView
 
@@ -79,17 +83,23 @@ class PlayerSearchResultsFragment : Fragment() {
     }
     fun makeApiCall(view:View):HomeViewModel{
         var homeView:HomeViewModel = HomeViewModel()
-        homeView.getPlayerSearchList()
-        homeView.getPlayerSearchResultsDataObserver().observe(viewLifecycleOwner,Observer<PlayerList>{
-            if(it != null){
-                Log.d(PlayerSearchResultsFragment::class.java.simpleName, it.row.toString())
-                homeView.setAdapterData(it.row as ArrayList<PlayerApiModel>)
-            }else{
-                Log.d(PlayerSearchResultsFragment::class.java.simpleName, "SOMETHING WENT WRONG")
-                Toast.makeText(view.context, "Error something went wrong with data", Toast.LENGTH_SHORT).show()
-            }
+        sharedViewModel = activity?.run {
+            ViewModelProviders.of(this).get(HomePlayerSearchSharedViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+        sharedViewModel.playerSearchTerm.observe(viewLifecycleOwner, Observer {
+             searchTerm = sharedViewModel.playerSearchTerm.value.toString()
+            homeView.getPlayerSearchResultsDataObserver().observe(viewLifecycleOwner,Observer<PlayerList>{
+                if(it != null){
+                    Log.d(PlayerSearchResultsFragment::class.java.simpleName, it.row.toString())
+                    homeView.setAdapterData(it.row as ArrayList<PlayerApiModel>)
+                }else{
+                    Log.d(PlayerSearchResultsFragment::class.java.simpleName, "SOMETHING WENT WRONG")
+                    Toast.makeText(view.context, "Error something went wrong with data", Toast.LENGTH_SHORT).show()
+                }
+            })
+            homeView.getPlayerSearchList(searchTerm)
         })
-        homeView.getPlayerSearchList()
+
         return homeView
     }
 }
