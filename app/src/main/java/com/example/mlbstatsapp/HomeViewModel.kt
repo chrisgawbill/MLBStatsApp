@@ -11,21 +11,11 @@ import retrofit2.Call
 import retrofit2.Response
 import javax.security.auth.callback.Callback
 
-class HomeViewModel: ViewModel() {
+class HomeViewModel(): ViewModel() {
     var playerSearchResults:MutableLiveData<PlayerList> = MutableLiveData()
     var playerSearchResultsRecyclerViewAdapter = PlayerSearchResultsAdapter()
+    var playerSearch:String = ""
 
-    var playerSearchResultsArray:ArrayList<PlayerApiModel> = ArrayList()
-    lateinit var playerSearch:String
-    val coroutineExceptionHandler = CoroutineExceptionHandler{_, throwable ->
-        throwable.printStackTrace()
-    }
-    fun HomeViewModel(){
-
-    }
-    fun getFavorites(){
-
-    }
     fun getAdapter(): PlayerSearchResultsAdapter{
         return playerSearchResultsRecyclerViewAdapter
     }
@@ -41,17 +31,23 @@ class HomeViewModel: ViewModel() {
     }
     fun getPlayerSearchList(){
         val mlbApi = RetrofitHelper.getInstance().create(MlbApi::class.java)
-        val call = mlbApi.getPlayerSearchResults()
-        call.enqueue(object:retrofit2.Callback<MlbApi>{
-            override fun onFailure(call: Call<MlbApi>, t:Throwable){
+        Log.d(HomeViewModel::class.java.simpleName, playerSearch)
+        val sportCode = "%27mlb%27"
+        val active = "%27Y%27"
+        val name = "%27Harper%25%27"
+        val call = mlbApi.getPlayerSearchResults(sportCode, active, name)
+        //val call = mlbApi.getPlayerSearchResults()
+        call.enqueue(object:retrofit2.Callback<ApiModel>{
+            override fun onFailure(call: Call<ApiModel>, t:Throwable){
                 Log.d(HomeViewModel::class.java.simpleName, "API CALLED FAILED")
                 Log.d(HomeViewModel::class.java.simpleName, t.message.toString())
             }
-            override fun onResponse(call:Call<MlbApi>, response: Response<MlbApi>){
+            override fun onResponse(call:Call<ApiModel>, response: Response<ApiModel>){
                 if(response.isSuccessful){
                     var apiModel:ApiModel = response.body() as ApiModel
                     var searchPlayerAll:SearchPlayerAll = apiModel.search_player_all as SearchPlayerAll
                     var playerList:PlayerList = searchPlayerAll.queryResults
+                    Log.d(HomeViewModel::class.java.simpleName, response.body().toString())
                     Log.d(HomeViewModel::class.java.simpleName, playerList.toString())
                     playerSearchResults.postValue(playerList)
                 }else{
