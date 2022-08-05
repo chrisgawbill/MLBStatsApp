@@ -8,21 +8,27 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding
 
-class PlayerSearchResultsAdapter(playerArrayParam:ArrayList<PlayerApiModel>): RecyclerView.Adapter<PlayerSearchResultsAdapter.PlayerSearchViewHolder>() {
-    var playerSearchArray:ArrayList<PlayerApiModel> = playerArrayParam
-    class PlayerSearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var playerNameText:TextView = itemView.findViewById(R.id.playerSearchResultsNameText)
+class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapter.PlayerSearchViewHolder>() {
+    var playerSearchArray:ArrayList<PlayerApiModel> = ArrayList()
+    class PlayerSearchViewHolder(val binding:PlayerSearchResultsRowBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(data:PlayerApiModel){
+            binding.playerApiModel = data
+            binding.executePendingBindings()
+        }
     }
-
+    fun setDataList(data:ArrayList<PlayerApiModel>){
+        this.playerSearchArray = data
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerSearchViewHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.player_search_results_row, parent, false)
-        return PlayerSearchViewHolder(view)
+        var layoutInflater = LayoutInflater.from(parent.context)
+        var rowBinding = PlayerSearchResultsRowBinding.inflate(layoutInflater)
+        return PlayerSearchViewHolder(rowBinding)
     }
 
     override fun onBindViewHolder(holder: PlayerSearchViewHolder, position: Int) {
-        var playerName = playerSearchArray.get(position).name_display_first_last
-        holder.playerNameText.text = playerName
+        holder.bind(playerSearchArray.get(position))
         holder.itemView.setOnClickListener(View.OnClickListener {
             rowClick(position, holder.itemView.context)
         })

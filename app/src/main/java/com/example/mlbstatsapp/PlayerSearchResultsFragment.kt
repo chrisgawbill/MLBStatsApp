@@ -6,8 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mlbstatsapp.databinding.FragmentPlayerSearchResultsBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,16 +43,18 @@ class PlayerSearchResultsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view:View = inflater.inflate(R.layout.fragment_player_search_results, container, false)
-        var homeView:HomeViewModel = HomeViewModel()
-        homeView.getPlayerSearchList()
-        var playerSearchResultsArray:ArrayList<PlayerApiModel> = homeView.playerSearchResultsArray
+        var bind:FragmentPlayerSearchResultsBinding = FragmentPlayerSearchResultsBinding.inflate(inflater, container, false)
+        var view = bind.root
+
+        val viewModel = makeApiCall(view)
+        bind.setVariable(BR.viewModel, viewModel)
+        bind.executePendingBindings()
 
         playerSearchResultsRecycler = view.findViewById(R.id.playerSearchResultsRecyclerView)
-        var layout = LinearLayoutManager(this.context)
-        playerSearchResultsRecycler.layoutManager = layout
-        var adapter = PlayerSearchResultsAdapter(playerSearchResultsArray)
-        playerSearchResultsRecycler.adapter = adapter
+        playerSearchResultsRecycler.apply {
+            layoutManager = LinearLayoutManager(this.context)
+        }
+
         return view
     }
 
@@ -70,5 +76,20 @@ class PlayerSearchResultsFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    fun makeApiCall(view:View):HomeViewModel{
+        var homeView:HomeViewModel = HomeViewModel()
+        homeView.getPlayerSearchList()
+        homeView.getPlayerSearchResultsDataObserver().observe(viewLifecycleOwner,Observer<PlayerList>{
+            if(it != null){
+                Log.d(PlayerSearchResultsFragment::class.java.simpleName, it.row.toString())
+                homeView.setAdapterData(it.row as ArrayList<PlayerApiModel>)
+            }else{
+                Log.d(PlayerSearchResultsFragment::class.java.simpleName, "SOMETHING WENT WRONG")
+                Toast.makeText(view.context, "Error something went wrong with data", Toast.LENGTH_SHORT).show()
+            }
+        })
+        homeView.getPlayerSearchList()
+        return homeView
     }
 }
