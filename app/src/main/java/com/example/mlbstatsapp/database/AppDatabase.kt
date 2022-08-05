@@ -10,14 +10,14 @@ abstract class AppDatabase: RoomDatabase() {
 
     abstract fun getTeamDao(): TeamDao
 
-    companion object{
+
         private var db_instance: AppDatabase? =null
 
-        fun getAppDatabaseInstance(context: Context): AppDatabase{
+    fun getAppDatabaseInstance(context: Context): AppDatabase{
 
             if(db_instance == null){
-                db_instance= Room.databaseBuilder<AppDatabase>(
-                    context.applicationContext, AppDatabase::class.java, "app_db"
+                db_instance= Room.databaseBuilder(
+                    context.applicationContext, AppDatabase::class.java, "mlb_stats"
                 )
 
                     .allowMainThreadQueries()
@@ -27,4 +27,3 @@ abstract class AppDatabase: RoomDatabase() {
         }
 
     }
-}
