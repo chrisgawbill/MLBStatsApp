@@ -9,7 +9,7 @@ import retrofit2.http.QueryMap
 interface MlbApi {
 
     @GET("named.search_player_all.bam")
-    fun getPlayerSearchResults(@QueryMap query:Map<String,String>): Call<ApiModel>
+    fun getPlayerSearchResults(@QueryMap query:Map<String,String>): Call<PlayerSearchApiModel>
 
 
 }

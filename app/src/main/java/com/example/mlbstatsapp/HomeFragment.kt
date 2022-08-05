@@ -74,7 +74,6 @@ class HomeFragment : Fragment() {
             }
     }
     fun playerSearchClick(playerSearchParam:String, view:View){
-        var homeView:HomeViewModel = HomeViewModel()
         sharedViewModel = activity?.run{
             ViewModelProviders.of(this).get(HomePlayerSearchSharedViewModel::class.java)
         }?: throw Exception("Invalid Activity")

@@ -1,5 +1,18 @@
 package com.example.mlbstatsapp
 
+data class PlayerSearchApiModel(
+    val search_player_all:SearchPlayerAll
+)
+data class SearchPlayerAll(
+    val copyRight:String,
+    val queryResults:PlayerList
+)
+
+data class PlayerList(
+    val created:String,
+    val totalSize:String,
+    val row: List<PlayerApiModel>
+)
 data class PlayerApiModel(
     val position:String,
     val birth_country:String,
@@ -31,3 +44,4 @@ data class PlayerApiModel(
     val service_years:String,
     val active_sw:String
 )
+

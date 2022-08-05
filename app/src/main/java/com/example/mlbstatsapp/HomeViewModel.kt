@@ -35,14 +35,14 @@ class HomeViewModel(): ViewModel() {
         val call = mlbApi.getPlayerSearchResults(queryMap)
         Log.d(HomeViewModel::class.java.simpleName, call.request().url().toString())
 
-        call.enqueue(object:retrofit2.Callback<ApiModel>{
-            override fun onFailure(call: Call<ApiModel>, t:Throwable){
+        call.enqueue(object:retrofit2.Callback<PlayerSearchApiModel>{
+            override fun onFailure(call: Call<PlayerSearchApiModel>, t:Throwable){
                 Log.d(HomeViewModel::class.java.simpleName, "API CALLED FAILED")
                 Log.d(HomeViewModel::class.java.simpleName, t.message.toString())
             }
-            override fun onResponse(call:Call<ApiModel>, response: Response<ApiModel>){
+            override fun onResponse(call:Call<PlayerSearchApiModel>, response: Response<PlayerSearchApiModel>){
                 if(response.isSuccessful){
-                    var apiModel:ApiModel = response.body() as ApiModel
+                    var apiModel:PlayerSearchApiModel = response.body() as PlayerSearchApiModel
                     var searchPlayerAll:SearchPlayerAll = apiModel.search_player_all as SearchPlayerAll
                     var playerList:PlayerList = searchPlayerAll.queryResults
                     Log.d(HomeViewModel::class.java.simpleName, response.body().toString())
