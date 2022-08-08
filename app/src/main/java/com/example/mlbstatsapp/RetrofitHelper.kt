@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+//object has errors
 
 object RetrofitHelper {
     val baseUrl = "http://lookup-service-prod.mlb.com/json/"
