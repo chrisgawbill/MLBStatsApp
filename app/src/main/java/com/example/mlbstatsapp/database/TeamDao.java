@@ -18,7 +18,6 @@ public interface TeamDao {
     //This method will be used to regularly update the team stats in the database.
     //Every so often, the api will be loaded and each element will be checked if the element
     //exists in teh database.   If it does, it will be updated in the updateTeam method
-    //It will also be used in the
     @Query("SELECT EXISTS (SELECT * FROM team WHERE name = :name)")
     boolean hasTeam(String name);
 
@@ -27,6 +26,7 @@ public interface TeamDao {
     void insertTeam(Team team);
 
     //Update team will be called on a time interval as games end several times daily in the MLB
+
     @Update
     void updateTeam(Team team);
 }
