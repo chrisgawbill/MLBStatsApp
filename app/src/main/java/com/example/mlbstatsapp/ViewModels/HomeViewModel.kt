@@ -1,21 +1,18 @@
-package com.example.mlbstatsapp
+package com.example.mlbstatsapp.ViewModels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.mlbstatsapp.*
+import com.example.mlbstatsapp.RecycleAdapters.PlayerSearchResultsAdapter
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 class HomeViewModel(): ViewModel() {
     var playerSearchResults:MutableLiveData<PlayerList> = MutableLiveData()
     var playerSearchResultsRecyclerViewAdapter = PlayerSearchResultsAdapter()
 
-    fun getAdapter(): PlayerSearchResultsAdapter{
+    fun getAdapter(): PlayerSearchResultsAdapter {
         return playerSearchResultsRecyclerViewAdapter
     }
     fun setAdapterData(data:ArrayList<PlayerApiModel>){
@@ -42,9 +39,9 @@ class HomeViewModel(): ViewModel() {
             }
             override fun onResponse(call:Call<PlayerSearchApiModel>, response: Response<PlayerSearchApiModel>){
                 if(response.isSuccessful){
-                    var apiModel:PlayerSearchApiModel = response.body() as PlayerSearchApiModel
-                    var searchPlayerAll:SearchPlayerAll = apiModel.search_player_all as SearchPlayerAll
-                    var playerList:PlayerList = searchPlayerAll.queryResults
+                    var apiModel: PlayerSearchApiModel = response.body() as PlayerSearchApiModel
+                    var searchPlayerAll: SearchPlayerAll = apiModel.search_player_all as SearchPlayerAll
+                    var playerList: PlayerList = searchPlayerAll.queryResults
                     Log.d(HomeViewModel::class.java.simpleName, response.body().toString())
                     Log.d(HomeViewModel::class.java.simpleName, playerList.toString())
                     playerSearchResults.postValue(playerList)

@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mlbstatsapp.HomeViewModel" />
+            type="com.example.mlbstatsapp.ViewModels.HomeViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"

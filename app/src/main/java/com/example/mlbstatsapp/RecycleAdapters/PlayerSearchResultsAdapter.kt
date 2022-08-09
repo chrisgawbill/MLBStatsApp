@@ -1,21 +1,20 @@
-package com.example.mlbstatsapp
+package com.example.mlbstatsapp.RecycleAdapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mlbstatsapp.IndividualPlayerArgs
+import com.example.mlbstatsapp.PlayerApiModel
+import com.example.mlbstatsapp.PlayerSearchResultsFragmentDirections
 import com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding
 
 class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapter.PlayerSearchViewHolder>() {
     var playerSearchArray:ArrayList<PlayerApiModel> = ArrayList()
     class PlayerSearchViewHolder(val binding:PlayerSearchResultsRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data:PlayerApiModel){
+        fun bind(data: PlayerApiModel){
             binding.playerApiModel = data
             binding.executePendingBindings()
         }
@@ -41,8 +40,9 @@ class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapte
     }
     fun rowClick(position:Int, context: Context, view:View){
         var playerId = playerSearchArray.get(position).player_id
-        val safeArgs:IndividualPlayerArgs
-        val action = PlayerSearchResultsFragmentDirections.actionPlayerSearchResultsFragmentToIndividualPlayer()
+        val safeArgs: IndividualPlayerArgs
+        val action =
+            PlayerSearchResultsFragmentDirections.actionPlayerSearchResultsFragmentToIndividualPlayer()
         action.playerId = playerId.toInt()
         Navigation.findNavController(view).navigate(action)
     }

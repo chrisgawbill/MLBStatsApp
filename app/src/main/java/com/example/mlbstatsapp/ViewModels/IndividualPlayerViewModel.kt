@@ -1,4 +1,4 @@
-package com.example.mlbstatsapp
+package com.example.mlbstatsapp.ViewModels
 
 import androidx.lifecycle.MutableLiveData
 

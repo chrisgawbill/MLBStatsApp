@@ -1,4 +1,4 @@
-package com.example.mlbstatsapp
+package com.example.mlbstatsapp.Fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -7,14 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mlbstatsapp.BR
+import com.example.mlbstatsapp.PlayerApiModel
+import com.example.mlbstatsapp.PlayerList
+import com.example.mlbstatsapp.R
+import com.example.mlbstatsapp.ViewModels.HomePlayerSearchSharedViewModel
+import com.example.mlbstatsapp.ViewModels.HomeViewModel
 import com.example.mlbstatsapp.databinding.FragmentPlayerSearchResultsBinding
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import java.lang.reflect.GenericArrayType
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,7 +36,7 @@ class PlayerSearchResultsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    lateinit var sharedViewModel:HomePlayerSearchSharedViewModel
+    lateinit var sharedViewModel: HomePlayerSearchSharedViewModel
     lateinit var searchTerm:String
 
     lateinit var playerSearchResultsRecycler:RecyclerView
@@ -84,8 +88,8 @@ class PlayerSearchResultsFragment : Fragment() {
                 }
             }
     }
-    fun makeApiCall(view:View):HomeViewModel{
-        var homeView:HomeViewModel = HomeViewModel()
+    fun makeApiCall(view:View): HomeViewModel {
+        var homeView: HomeViewModel = HomeViewModel()
         sharedViewModel = activity?.run {
             ViewModelProviders.of(this).get(HomePlayerSearchSharedViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
