@@ -33,15 +33,17 @@ class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapte
     override fun onBindViewHolder(holder: PlayerSearchViewHolder, position: Int) {
         holder.bind(playerSearchArray.get(position))
         holder.itemView.setOnClickListener(View.OnClickListener {
-            rowClick(position, holder.itemView.context)
+            rowClick(position, holder.itemView.context, holder.itemView)
         })
     }
 
     override fun getItemCount(): Int {
         return playerSearchArray.size
     }
-    fun rowClick(position:Int, context: Context){
+    fun rowClick(position:Int, context: Context, view:View){
         var playerId = playerSearchArray.get(position).player_id
         Toast.makeText(context, playerId, Toast.LENGTH_SHORT).show()
+
+        Navigation.findNavController(view).navigate(R.id.action_playerSearchResultsFragment_to_individualPlayer)
     }
 }
