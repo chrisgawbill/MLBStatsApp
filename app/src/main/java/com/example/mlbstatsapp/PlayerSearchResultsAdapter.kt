@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding
 
 class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapter.PlayerSearchViewHolder>() {
     var playerSearchArray:ArrayList<PlayerApiModel> = ArrayList()
+    lateinit var sharedViewModel:PlayerSearchIndividualPlayerSharedViewModel
     class PlayerSearchViewHolder(val binding:PlayerSearchResultsRowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data:PlayerApiModel){
             binding.playerApiModel = data
@@ -38,7 +41,7 @@ class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapte
         return playerSearchArray.size
     }
     fun rowClick(position:Int, context: Context){
-        var playerName = playerSearchArray.get(position).name_display_first_last
-        Toast.makeText(context, playerName, Toast.LENGTH_SHORT).show()
+        var playerId = playerSearchArray.get(position).player_id
+        Toast.makeText(context, playerId, Toast.LENGTH_SHORT).show()
     }
 }

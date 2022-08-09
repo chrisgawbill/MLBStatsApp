@@ -13,10 +13,32 @@
         <action
             android:id="@+id/action_homeFragment_to_playerSearchResultsFragment"
             app:destination="@id/playerSearchResultsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_teamsListFragment"
+            app:destination="@id/teamsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/playerSearchResultsFragment"
         android:name="com.example.mlbstatsapp.PlayerSearchResultsFragment"
         android:label="fragment_player_search_results"
-        tools:layout="@layout/fragment_player_search_results" />
+        tools:layout="@layout/fragment_player_search_results" >
+        <action
+            android:id="@+id/action_playerSearchResultsFragment_to_individualPlayer"
+            app:destination="@id/individualPlayer" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.mlbstatsapp.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/teamsListFragment"
+        android:name="com.example.mlbstatsapp.TeamsListFragment"
+        android:label="fragment_teams_list"
+        tools:layout="@layout/fragment_teams_list" />
+    <fragment
+        android:id="@+id/individualPlayer"
+        android:name="com.example.mlbstatsapp.IndividualPlayer"
+        android:label="fragment_individual_player"
+        tools:layout="@layout/fragment_individual_player" />
 </navigation>
