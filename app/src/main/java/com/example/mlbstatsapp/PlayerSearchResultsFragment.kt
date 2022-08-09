@@ -13,6 +13,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mlbstatsapp.databinding.FragmentPlayerSearchResultsBinding
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.GenericArrayType
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -91,7 +94,22 @@ class PlayerSearchResultsFragment : Fragment() {
              homeView.getPlayerSearchResultsDataObserver().observe(viewLifecycleOwner,Observer<PlayerList>{
                 if(it != null){
                     Log.d(PlayerSearchResultsFragment::class.java.simpleName, it.row.toString())
-                    homeView.setAdapterData(it.row as ArrayList<PlayerApiModel>)
+                    var playerArrayList:ArrayList<PlayerApiModel> = ArrayList()
+                    if(it.totalSize.toInt() > 1){
+                        var genericArray = it.row as ArrayList<GenericArrayType>
+                        for(i in 0..(genericArray.size)-1){
+                            var json = Gson().toJson(genericArray.get(i))
+                            var playerObjet = Gson().fromJson(json, PlayerApiModel::class.java)
+                            playerArrayList.add(playerObjet)
+                        }
+                    }else{
+                        var json = Gson().toJson(it.row)
+                        var playerObject = Gson().fromJson(json, PlayerApiModel::class.java)
+                        playerArrayList.add(playerObject)
+                    }
+                    Log.d(PlayerSearchResultsFragment::class.java.simpleName, playerArrayList.toString())
+                    homeView.setAdapterData(playerArrayList)
+
                 }else{
                     Log.d(PlayerSearchResultsFragment::class.java.simpleName, "SOMETHING WENT WRONG")
                     Toast.makeText(view.context, "Error something went wrong with data", Toast.LENGTH_SHORT).show()
