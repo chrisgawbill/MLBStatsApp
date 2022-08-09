@@ -14,7 +14,6 @@ import com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding
 
 class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapter.PlayerSearchViewHolder>() {
     var playerSearchArray:ArrayList<PlayerApiModel> = ArrayList()
-    lateinit var sharedViewModel:PlayerSearchIndividualPlayerSharedViewModel
     class PlayerSearchViewHolder(val binding:PlayerSearchResultsRowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data:PlayerApiModel){
             binding.playerApiModel = data
@@ -42,8 +41,9 @@ class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapte
     }
     fun rowClick(position:Int, context: Context, view:View){
         var playerId = playerSearchArray.get(position).player_id
-        Toast.makeText(context, playerId, Toast.LENGTH_SHORT).show()
-
-        Navigation.findNavController(view).navigate(R.id.action_playerSearchResultsFragment_to_individualPlayer)
+        val safeArgs:IndividualPlayerArgs
+        val action = PlayerSearchResultsFragmentDirections.actionPlayerSearchResultsFragmentToIndividualPlayer()
+        action.playerId = playerId.toInt()
+        Navigation.findNavController(view).navigate(action)
     }
 }

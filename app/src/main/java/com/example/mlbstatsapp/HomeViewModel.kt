@@ -50,7 +50,6 @@ class HomeViewModel(): ViewModel() {
                     playerSearchResults.postValue(playerList)
                 }else{
                     Log.d(HomeViewModel::class.java.simpleName, "NOTHING WAS RETURNED")
-                    playerSearchResults.postValue(null)
                 }
 
             }

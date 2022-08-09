@@ -1,8 +1,9 @@
 package com.example.mlbstatsapp
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 
-class PlayerSearchIndividualPlayerSharedViewModel {
+class PlayerSearchIndividualPlayerSharedViewModel:ViewModel() {
     val playerId = MutableLiveData<Int>()
 
     fun playerId(playerIdParam:Int){

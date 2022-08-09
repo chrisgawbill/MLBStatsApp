@@ -40,5 +40,10 @@
         android:id="@+id/individualPlayer"
         android:name="com.example.mlbstatsapp.IndividualPlayer"
         android:label="fragment_individual_player"
-        tools:layout="@layout/fragment_individual_player" />
+        tools:layout="@layout/fragment_individual_player" >
+        <argument
+            android:name="player_id"
+            android:defaultValue="0">
+        </argument>
+    </fragment>
 </navigation>
