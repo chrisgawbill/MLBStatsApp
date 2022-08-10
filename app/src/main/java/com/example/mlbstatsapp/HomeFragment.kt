@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
@@ -74,11 +75,22 @@ class HomeFragment : Fragment() {
             }
     }
     fun playerSearchClick(playerSearchParam:String, view:View){
+
         sharedViewModel = activity?.run{
             ViewModelProviders.of(this).get(HomePlayerSearchSharedViewModel::class.java)
+
+
         }?: throw Exception("Invalid Activity")
+
         sharedViewModel.playerSearchTerm.value = playerSearchParam
 
-        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_playerSearchResultsFragment)
+        // Just for testing purposes to verify the button is execution this function.   Comment out before deployment
+        val toast= Toast.makeText(context, "This also works", Toast.LENGTH_SHORT)
+        toast.show()
+
+
+        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_playerSearchResultsFragment);
+
+
     }
 }

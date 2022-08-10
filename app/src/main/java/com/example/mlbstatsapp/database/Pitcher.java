@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Pitcher {
+public class Pitcher implements Player{
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -42,6 +42,10 @@ public class Pitcher {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id){
+        this.id= id;
     }
 
     public String getFirstName() {

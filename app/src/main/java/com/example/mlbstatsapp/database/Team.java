@@ -1,6 +1,7 @@
 package com.example.mlbstatsapp.database;
 
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -8,8 +9,9 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Team {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    private String id;
     @ColumnInfo(name= "location")
     private String location;
     @ColumnInfo(name= "name")
@@ -27,23 +29,27 @@ public class Team {
     @ColumnInfo(name= "division")
     private String division;
     @ColumnInfo(name= "games-back")
-    private int gamesBack;
+    private float gamesBack;
 
 
-    public Team(String location, String name, int wins, int losses, String streak, String lastTen, String league, String division, int gamesBack) {
+
+    public Team(String id, String location, String name, String league, String division) {
+        this.id= id;
         this.location = location;
         this.name = name;
-        this.wins = wins;
-        this.losses = losses;
-        this.streak = streak;
-        this.lastTen = lastTen;
+
         this.league = league;
         this.division = division;
-        this.gamesBack = gamesBack;
+
+
     }
 
-    public int getId() {
+    public String getId() {
         return id;
+    }
+
+    public void setId(String id){
+        this.id= id;
     }
 
     public String getLocation() {
@@ -110,11 +116,13 @@ public class Team {
         this.division = division;
     }
 
-    public int getGamesBack() {
+    public float getGamesBack() {
         return gamesBack;
     }
 
-    public void setGamesBack(int gamesBack) {
+    public void setGamesBack(float gamesBack) {
         this.gamesBack = gamesBack;
     }
+
+
 }

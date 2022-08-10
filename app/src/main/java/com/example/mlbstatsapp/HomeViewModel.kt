@@ -1,5 +1,6 @@
 package com.example.mlbstatsapp
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,6 +41,7 @@ class HomeViewModel(): ViewModel() {
                 Log.d(HomeViewModel::class.java.simpleName, "API CALLED FAILED")
                 Log.d(HomeViewModel::class.java.simpleName, t.message.toString())
             }
+            @SuppressLint("NullSafeMutableLiveData")
             override fun onResponse(call:Call<PlayerSearchApiModel>, response: Response<PlayerSearchApiModel>){
                 if(response.isSuccessful){
                     var apiModel:PlayerSearchApiModel = response.body() as PlayerSearchApiModel
