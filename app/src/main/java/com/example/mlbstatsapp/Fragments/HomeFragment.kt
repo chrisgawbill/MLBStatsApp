@@ -1,17 +1,18 @@
-package com.example.mlbstatsapp
+package com.example.mlbstatsapp.Fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.example.mlbstatsapp.R
+import com.example.mlbstatsapp.HomePlayerSearchSharedViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +30,7 @@ class HomeFragment : Fragment() {
     private var param2: String? = null
     lateinit var playerSearchBtn:Button
     lateinit var playerSearchText:EditText
-    lateinit var sharedViewModel:HomePlayerSearchSharedViewModel
+    lateinit var sharedViewModel: HomePlayerSearchSharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,11 @@ class HomeFragment : Fragment() {
         playerSearchText = view.findViewById(R.id.searchPlayerText)
         playerSearchBtn.setOnClickListener(View.OnClickListener {
             var playerSearchClickParam = playerSearchText.text.toString()
-            playerSearchClick(playerSearchClickParam, view)
+            if(!TextUtils.isEmpty(playerSearchClickParam)){
+                playerSearchClick(playerSearchClickParam, view)
+            }else{
+                playerSearchText.hint = "Please enter a name"
+            }
         })
         return view
     }
