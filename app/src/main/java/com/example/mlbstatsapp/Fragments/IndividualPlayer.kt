@@ -1,24 +1,24 @@
 package com.example.mlbstatsapp.Fragments
 
-import android.os.Binder
+import android.R
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.mlbstatsapp.ApiModels.PlayerHittingStats
 import com.example.mlbstatsapp.ApiModels.PlayerPitchingStat
 import com.example.mlbstatsapp.BR
-import com.example.mlbstatsapp.R
 import com.example.mlbstatsapp.IndividualPlayerViewModel
-import com.example.mlbstatsapp.PlayerApiModel
 import com.example.mlbstatsapp.databinding.FragmentIndividualPlayerBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,8 +54,8 @@ class IndividualPlayer : Fragment() {
         // Inflate the layout for this fragment
         var bind: com.example.mlbstatsapp.databinding.FragmentIndividualPlayerBinding = com.example.mlbstatsapp.databinding.FragmentIndividualPlayerBinding.inflate(inflater, container, false)
         var view = bind.root
-        hittingStatsLayout = view.findViewById(R.id.hittingStatConstraintLayout)
-        pitchingStatsLayout = view.findViewById(R.id.pitchingStatConstraintLayout)
+        hittingStatsLayout = view.findViewById(com.example.mlbstatsapp.R.id.hittingStatConstraintLayout)
+        pitchingStatsLayout = view.findViewById(com.example.mlbstatsapp.R.id.pitchingStatConstraintLayout)
 
         val safeArgs: IndividualPlayerArgs by navArgs()
         val playerId = safeArgs.playerId

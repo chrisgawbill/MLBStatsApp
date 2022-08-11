@@ -1,12 +1,14 @@
 package com.example.mlbstatsapp.Fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.mlbstatsapp.R
@@ -48,7 +50,11 @@ class HomeFragment : Fragment() {
         playerSearchText = view.findViewById(R.id.searchPlayerText)
         playerSearchBtn.setOnClickListener(View.OnClickListener {
             var playerSearchClickParam = playerSearchText.text.toString()
-            playerSearchClick(playerSearchClickParam, view)
+            if(!TextUtils.isEmpty(playerSearchClickParam)){
+                playerSearchClick(playerSearchClickParam, view)
+            }else{
+                playerSearchText.hint = "Please enter a name"
+            }
         })
         return view
     }

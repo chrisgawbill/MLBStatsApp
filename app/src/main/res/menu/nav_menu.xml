@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
-        android:title="@string/nav_home"/>
+        android:id="@+id/homeFragment"
+        android:title="@string/nav_home"
+        android:icon="@drawable/ic_bottom_nav_home"/>
     <item
-        android:id="@+id/teams"
-        android:title="@string/nav_teams"/>
+        android:id="@+id/teamsListFragment"
+        android:title="@string/nav_teams"
+        android:icon="@drawable/ic_bottom_nav_team_list"/>
     <item
-        android:id="@+id/settings"
-        android:title="@string/nav_settings"/>
+        android:id="@+id/settingsFragment"
+        android:title="@string/nav_settings"
+        android:icon="@drawable/ic_bottom_nav_settings"/>
 </menu>
