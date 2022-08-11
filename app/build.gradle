@@ -75,7 +75,7 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.5.0-alpha02'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
-    //implementation 'com.github.amitshekhariitbhu:Fast-Android-Networking:1.0.2'
+   //Android Networking
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
 }
 
