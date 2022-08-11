@@ -10,7 +10,7 @@ import android.widget.EditText
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.mlbstatsapp.R
-import com.example.mlbstatsapp.ViewModels.HomePlayerSearchSharedViewModel
+import com.example.mlbstatsapp.HomePlayerSearchSharedViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

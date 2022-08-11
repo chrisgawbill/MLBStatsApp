@@ -15,8 +15,8 @@ import com.example.mlbstatsapp.BR
 import com.example.mlbstatsapp.PlayerApiModel
 import com.example.mlbstatsapp.PlayerList
 import com.example.mlbstatsapp.R
-import com.example.mlbstatsapp.ViewModels.HomePlayerSearchSharedViewModel
-import com.example.mlbstatsapp.ViewModels.HomeViewModel
+import com.example.mlbstatsapp.HomePlayerSearchSharedViewModel
+import com.example.mlbstatsapp.HomeViewModel
 import com.example.mlbstatsapp.databinding.FragmentPlayerSearchResultsBinding
 import com.google.gson.Gson
 import java.lang.reflect.GenericArrayType
@@ -58,7 +58,7 @@ class PlayerSearchResultsFragment : Fragment() {
         var view = bind.root
 
         val viewModel = makeApiCall(view)
-        bind.setVariable(BR.viewModel, viewModel)
+        bind.setVariable(BR.homeViewModel, viewModel)
         bind.executePendingBindings()
 
         playerSearchResultsRecycler = view.findViewById(R.id.playerSearchResultsRecyclerView)

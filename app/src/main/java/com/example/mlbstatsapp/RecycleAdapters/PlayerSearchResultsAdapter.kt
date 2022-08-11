@@ -4,16 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mlbstatsapp.IndividualPlayerArgs
+import com.example.mlbstatsapp.Fragments.IndividualPlayerArgs
+import com.example.mlbstatsapp.Fragments.PlayerSearchResultsFragmentDirections
 import com.example.mlbstatsapp.PlayerApiModel
-import com.example.mlbstatsapp.PlayerSearchResultsFragmentDirections
 import com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding
 
 class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapter.PlayerSearchViewHolder>() {
     var playerSearchArray:ArrayList<PlayerApiModel> = ArrayList()
-    class PlayerSearchViewHolder(val binding:PlayerSearchResultsRowBinding) : RecyclerView.ViewHolder(binding.root) {
+    class PlayerSearchViewHolder(val binding: com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: PlayerApiModel){
             binding.playerApiModel = data
             binding.executePendingBindings()
@@ -39,11 +40,19 @@ class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapte
         return playerSearchArray.size
     }
     fun rowClick(position:Int, context: Context, view:View){
-        var playerId = playerSearchArray.get(position).player_id
         val safeArgs: IndividualPlayerArgs
+        var player = playerSearchArray.get(position)as PlayerApiModel
         val action =
             PlayerSearchResultsFragmentDirections.actionPlayerSearchResultsFragmentToIndividualPlayer()
-        action.playerId = playerId.toInt()
+        action.playerId = player.player_id.toInt()
+        action.playerFirstName = player.name_first
+        action.playerLastName = player.name_last
+        action.playerPosition = player.position
+        action.playerHeight = player.height_feet
+        action.playerWeight = player.weight
+        action.playerCollege = player.college
+        action.playerHighSchool = player.high_school
+        action.playerCurrentTeam = player.team_full
         Navigation.findNavController(view).navigate(action)
     }
 }

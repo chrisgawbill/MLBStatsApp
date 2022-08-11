@@ -1,14 +1,381 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".IndividualPlayer">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="playerStats"
+            type="com.example.mlbstatsapp.IndividualPlayerViewModel" />
+    </data>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".IndividualPlayer">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/lastNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="13dp"
+            android:text="@{playerStats.playerLastName}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstNameLabel" />
+
+        <TextView
+            android:id="@+id/firstNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@{playerStats.playerFirstName}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/generalInfoConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/statsConstraintLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="60dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/generalInfoLabel"
+                        android:layout_column="2"
+                        android:text="General Info" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/playerPositionLabel"
+                        android:layout_column="1"
+                        android:text="Position: "></TextView>
+
+                    <TextView
+                        android:id="@+id/playerPositionInfo"
+                        android:layout_column="2"
+                        android:text="@{playerStats.playerPosition}"></TextView>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/playerCurrentTeamLabel"
+                        android:layout_column="1"
+                        android:text="Current Team: "></TextView>
+
+                    <TextView
+                        android:id="@+id/currentTeamInfo"
+                        android:layout_column="2"
+                        android:text="@{playerStats.playerCurrentTeam}"></TextView>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/playerHeightLabel"
+                        android:layout_column="1"
+                        android:text="Height: "></TextView>
+
+                    <TextView
+                        android:id="@+id/playerHeightInfo"
+                        android:layout_column="2"
+                        android:text="@{playerStats.playerHeight}"></TextView>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/playerWeightLabel"
+                        android:layout_column="1"
+                        android:text="Weight: "></TextView>
+
+                    <TextView
+                        android:id="@+id/playerWeightInfo"
+                        android:layout_column="2"
+                        android:text="@{playerStats.playerWeight}"></TextView>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/playerHighSchoolLabel"
+                        android:layout_column="1"
+                        android:text="High School: "></TextView>
+
+                    <TextView
+                        android:id="@+id/playerHighSchoolInfo"
+                        android:layout_column="2"
+                        android:text="@{playerStats.playerHighSchool}"></TextView>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/playerCollegeLabel"
+                        android:layout_column="1"
+                        android:text="College: "></TextView>
+
+                    <TextView
+                        android:id="@+id/playerCollegeInfo"
+                        android:layout_column="2"
+                        android:text="@{playerStats.playerCollege}"></TextView>
+                </TableRow>
+            </TableLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statsConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="329dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pitchingStatConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="60dp">
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/pitchingStatsLabel"
+                            android:layout_column="3"
+                            android:text="Pitching Stats"/>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/winsStatLabel"
+                            android:layout_column="1"
+                            android:text="Wins: " />
+                        <TextView
+                            android:id="@+id/winsStatTextView"
+                            android:layout_column="2"
+                            android:text="@{playerStats.playerPitchingStatsLiveData.w}"/>
+                        <TextView
+                            android:id="@+id/losesStatLabel"
+                            android:layout_column="4"
+                            android:text="Loses: " />
+                        <TextView
+                            android:id="@+id/losesStatTextView"
+                            android:layout_column="5"
+                            android:text="@{playerStats.playerPitchingStatsLiveData.l}"/>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/strikeoutsStatLabel"
+                            android:layout_column="1"
+                            android:text="SO: " />
+                        <TextView
+                            android:id="@+id/strikoutStatTextView"
+                            android:layout_column="2"
+                            android:text="@{playerStats.playerPitchingStatsLiveData.so}"/>
+                        <TextView
+                            android:id="@+id/k9StatLabel"
+                            android:layout_column="4"
+                            android:text="K9: " />
+                        <TextView
+                            android:id="@+id/ks9StatTextView"
+                            android:layout_column="5"
+                            android:text="@{playerStats.playerPitchingStatsLiveData.k9}"/>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/whipStatLabel"
+                            android:layout_column="1"
+                            android:text="WHIP: " />
+                        <TextView
+                            android:id="@+id/whipStatTextView"
+                            android:layout_column="2"
+                            android:text="@{playerStats.playerPitchingStatsLiveData.whip}"/>
+                        <TextView
+                            android:id="@+id/eraStatLabel"
+                            android:layout_column="4"
+                            android:text="ERA: " />
+                        <TextView
+                            android:id="@+id/eraStatTextView"
+                            android:layout_column="5"
+                            android:text="@{playerStats.playerPitchingStatsLiveData.era}"/>
+                    </TableRow>
+                </TableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/hittingStatConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="60dp">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/hittingStatsLabel"
+                            android:layout_column="3"
+                            android:text="Hitting Stats" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/runSatLabel"
+                            android:layout_column="1"
+                            android:text="Runs: " />
+
+                        <TextView
+                            android:id="@+id/runStatTextView"
+                            android:layout_column="2"
+                            android:text="@{playerStats.playerHittingStatsLiveData.r}" />
+
+                        <TextView
+                            android:id="@+id/rbiStatLabel"
+                            android:layout_column="4"
+                            android:text="RBIs: " />
+
+                        <TextView
+                            android:id="@+id/rbiStatTextView"
+                            android:layout_column="5"
+                            android:text="@{playerStats.playerHittingStatsLiveData.rbi}" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/hitStatLabel"
+                            android:layout_column="1"
+                            android:text="Hits: " />
+
+                        <TextView
+                            android:id="@+id/hitStatTextView"
+                            android:layout_column="2"
+                            android:text="@{playerStats.playerHittingStatsLiveData.h}" />
+
+                        <TextView
+                            android:id="@+id/atBatStatLabel"
+                            android:layout_column="4"
+                            android:text="At Bat: " />
+
+                        <TextView
+                            android:id="@+id/atBatStatTextView"
+                            android:layout_column="5"
+                            android:text="@{playerStats.playerHittingStatsLiveData.ab}" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/homeRunStatLabel"
+                            android:layout_column="1"
+                            android:text="Home Runs: " />
+
+                        <TextView
+                            android:id="@+id/homeRunStatTextView"
+                            android:layout_column="2"
+                            android:text="@{playerStats.playerHittingStatsLiveData.hr}" />
+
+                        <TextView
+                            android:id="@+id/obpStatLabel"
+                            android:layout_column="4"
+                            android:text="OBP: " />
+
+                        <TextView
+                            android:id="@+id/obpStatTextView"
+                            android:layout_column="5"
+                            android:text="@{playerStats.playerHittingStatsLiveData.obp}" />
+                    </TableRow>
+                </TableLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

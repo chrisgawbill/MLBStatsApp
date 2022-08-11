@@ -1,9 +1,8 @@
-package com.example.mlbstatsapp.ViewModels
+package com.example.mlbstatsapp
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mlbstatsapp.*
 import com.example.mlbstatsapp.RecycleAdapters.PlayerSearchResultsAdapter
 import retrofit2.Call
 import retrofit2.Response
@@ -40,7 +39,7 @@ class HomeViewModel(): ViewModel() {
             override fun onResponse(call:Call<PlayerSearchApiModel>, response: Response<PlayerSearchApiModel>){
                 if(response.isSuccessful){
                     var apiModel: PlayerSearchApiModel = response.body() as PlayerSearchApiModel
-                    var searchPlayerAll: SearchPlayerAll = apiModel.search_player_all as SearchPlayerAll
+                    var searchPlayerAll: SearchPlayerAll = apiModel.search_player_all
                     var playerList: PlayerList = searchPlayerAll.queryResults
                     Log.d(HomeViewModel::class.java.simpleName, response.body().toString())
                     Log.d(HomeViewModel::class.java.simpleName, playerList.toString())
