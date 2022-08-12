@@ -65,11 +65,15 @@
             android:defaultValue="Placeholder">
         </argument>
         <argument
-            android:name="player_college"
+            android:name="player_bats"
             android:defaultValue="Placeholder">
         </argument>
         <argument
-            android:name="player_high_school"
+            android:name="player_throws"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="player_hometown"
             android:defaultValue="Placeholder">
         </argument>
         <argument

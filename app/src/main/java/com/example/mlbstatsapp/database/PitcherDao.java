@@ -9,7 +9,7 @@ import java.util.List;
 
 @Dao
 public interface PitcherDao {
-    @Query("SELECT * FROM pitcher WHERE 'player-id'= :id")
+    @Query("SELECT * FROM pitcher WHERE `player-id`= :id")
     Pitcher findPitcher(String id);
 
     @Query("SELECT * FROM pitcher")

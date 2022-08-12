@@ -50,8 +50,9 @@ class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapte
         action.playerPosition = player.position
         action.playerHeight = player.height_feet
         action.playerWeight = player.weight
-        action.playerCollege = player.college
-        action.playerHighSchool = player.high_school
+        action.playerBats = player.bats
+        action.playerThrows = player.throws
+        action.playerHometown = player.birth_city + ", " +  player.birth_country
         action.playerCurrentTeam = player.team_full
         Navigation.findNavController(view).navigate(action)
     }

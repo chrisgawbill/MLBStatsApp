@@ -21,6 +21,7 @@ import com.example.mlbstatsapp.ApiModels.PlayerHittingStats
 import com.example.mlbstatsapp.ApiModels.PlayerPitchingStat
 import com.example.mlbstatsapp.database.Batter
 import com.example.mlbstatsapp.database.Pitcher
+import com.example.mlbstatsapp.database.Player
 import com.example.mlbstatsapp.databinding.FragmentIndividualPlayerBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,6 +44,8 @@ class IndividualPlayer : Fragment() {
     lateinit var pitchingStatsLayout: ConstraintLayout
 
     lateinit var favoriteIcon:ImageButton
+    lateinit var pitcher: Pitcher
+    lateinit var batter: Batter
 
     var playerId:Int = 0
     var playerPosition:String = ""
@@ -73,11 +76,15 @@ class IndividualPlayer : Fragment() {
         val playerHeight = safeArgs.playerHeight
         val playerWeight = safeArgs.playerWeight
         val playerCurrentTeam = safeArgs.playerCurrentTeam
-        val playerHighSchool = safeArgs.playerHighSchool
-        val playerCollege = safeArgs.playerCollege
+        val playerHometown = safeArgs.playerHometown
+        val playerBats = safeArgs.playerBats
+        val playerThrows = safeArgs.playerThrows
+        if(playerPosition == "P"){
+
+        }
 
         individualPlayerViewModel.setGeneralPlayerInfo(playerPosition, playerFirstName,playerLastName,playerHeight, playerWeight,
-        playerCurrentTeam,playerHighSchool,playerCollege)
+        playerCurrentTeam,playerThrows,playerBats, playerHometown)
 
         Log.d(IndividualPlayer::class.java.simpleName, playerId.toString())
         Log.d(IndividualPlayer::class.java.simpleName, playerPosition)
@@ -147,7 +154,6 @@ class IndividualPlayer : Fragment() {
         individualPlayerViewModel.getPlayerPitchingStats(playerIdParam)
     }
     fun setFavoriteImageButton(playerIdParam:Int, playerPositionParam: String, viewParam:View){
-        var isFavorite:Boolean = false
         var pitcherFavorite:Pitcher? = null
         var batterFavorite:Batter? = null
         Log.d(IndividualPlayer::class.java.simpleName, playerIdParam.toString())
@@ -181,21 +187,9 @@ class IndividualPlayer : Fragment() {
         }
     }
     fun insertFavoriteIntoDB(){
-        val db = LoadData.getInstance(activity?.applicationContext ?: activity?.applicationContext)
-        if(playerPosition == "P"){
-            var pitcher:Pitcher = Pitcher(playerId.toString(),null,null,null,null,null,null, 0.0F,0,0)
-            db.insertPitcher(pitcher)
-        }else{
-            var batter:Batter = Batter(playerId.toString(),null,null,null,null,null,null,null,0,0,0.0F)
-            db.insertBatter(batter)
-        }
+       individualPlayerViewModel.insertFavoriteIntoDb(activity, playerId.toString());
     }
     fun deleteFavoriteFromDB(){
-        val db = LoadData.getInstance(activity?.applicationContext ?: activity?.applicationContext)
-        if(playerPosition == "P"){
-            db.deletePitcher(playerId.toString())
-        }else{
-            db.deleteBatter(playerId.toString())
-        }
+        individualPlayerViewModel.deleteFavoritePlayerFromDb(activity, playerId.toString());
     }
 }

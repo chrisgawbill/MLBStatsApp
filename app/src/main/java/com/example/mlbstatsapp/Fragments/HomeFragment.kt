@@ -2,22 +2,41 @@ package com.example.mlbstatsapp
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mlbstatsapp.RecycleAdapters.FavoriteBattersAdapter
+import com.example.mlbstatsapp.RecycleAdapters.FavoritePitcherAdapter
+import com.example.mlbstatsapp.database.Batter
+import com.example.mlbstatsapp.database.Pitcher
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
+lateinit var homeViewModel:HomeViewModel
+lateinit var favoritePlayersConstraintLayout:ConstraintLayout
+lateinit var favoriteBattersConstraintLayout: ConstraintLayout
+lateinit var favoritePitchersConstraintLayout: ConstraintLayout
+
+lateinit var favoriteBatterRecycler:RecyclerView
+lateinit var favoritePitcherRecycler: RecyclerView
 
 /**
  * A simple [Fragment] subclass.
@@ -46,6 +65,13 @@ public class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var view:View  = inflater.inflate(R.layout.fragment_home, container, false)
+        favoritePlayersConstraintLayout = view.findViewById(R.id.favorite_players_constraint)
+        favoriteBattersConstraintLayout = view.findViewById(R.id.favorite_batters_constraint)
+        favoritePitchersConstraintLayout = view.findViewById(R.id.favorite_pitchers_constraint)
+
+        favoriteBatterRecycler = view.findViewById(R.id.favorite_batters_recycler)
+        favoritePitcherRecycler = view.findViewById(R.id.favorite_pitchers_recycler)
+
         playerSearchBtn = view.findViewById(R.id.searchPlayerButton)
         playerSearchText = view.findViewById(R.id.searchPlayerText)
         playerSearchBtn.setOnClickListener(View.OnClickListener {
@@ -56,6 +82,9 @@ public class HomeFragment : Fragment() {
                 playerSearchText.hint = "Please enter a name"
             }
         })
+        homeViewModel = HomeViewModel(activity)
+        getFavorites(view)
+
         return view
     }
 
@@ -85,5 +114,33 @@ public class HomeFragment : Fragment() {
         sharedViewModel.playerSearchTerm.value = playerSearchParam
 
         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_playerSearchResultsFragment)
+    }
+    fun getFavorites(view:View){
+        val batterList:List<Batter> = homeViewModel.getAllBatters()
+        val pitcherList:List<Pitcher> = homeViewModel.getAllPitchers()
+        Log.d(HomeFragment::class.java.simpleName, batterList.size.toString())
+        Log.d(HomeFragment::class.java.simpleName, pitcherList.size.toString())
+
+        if(batterList.isEmpty() && pitcherList.isEmpty()){
+            favoritePlayersConstraintLayout.isVisible = false
+            favoriteBatterRecycler.adapter = null
+            favoritePitcherRecycler.adapter = null
+        }else if(batterList.isEmpty()){
+            favoriteBattersConstraintLayout.isVisible = false
+            favoriteBatterRecycler.adapter = null
+        }else if(pitcherList.isEmpty()){
+            favoritePitchersConstraintLayout.isVisible = false
+            favoritePitcherRecycler.adapter = null
+        }else if(batterList.isNotEmpty()){
+            val layout:LinearLayoutManager = LinearLayoutManager(view.context)
+            favoriteBatterRecycler.layoutManager = layout
+            val adapter = FavoriteBattersAdapter(batterList)
+            favoriteBatterRecycler.adapter = adapter
+        }else if(pitcherList.isNotEmpty()) {
+            val layout:LinearLayoutManager = LinearLayoutManager(view.context)
+            favoritePitcherRecycler.layoutManager = layout
+            val adapter = FavoritePitcherAdapter(pitcherList)
+            favoritePitcherRecycler.adapter = adapter
+        }
     }
 }
