@@ -10,6 +10,8 @@ public class Batter implements Player {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
+    @ColumnInfo(name= "player-id")
+    private String playerId;
     @ColumnInfo(name= "first-name")
     private String firstName;
     @ColumnInfo(name= "last-name")
@@ -31,7 +33,8 @@ public class Batter implements Player {
     @ColumnInfo(name= "ba")
     private float ba;
 
-    public Batter(String firstName, String lastName, String hometown, String team, String bats, String handThrows, String position, int hr, int rbi, float ba) {
+    public Batter(String playerId, String firstName, String lastName, String hometown, String team, String bats, String handThrows, String position, int hr, int rbi, float ba) {
+        this.playerId = playerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.hometown = hometown;
@@ -51,6 +54,10 @@ public class Batter implements Player {
     public void setId(int id){
         this.id= id;
     }
+
+    public String getPlayerId(){return playerId;}
+
+    public void setPlayerId(String playerId){this.playerId = playerId;}
 
     public String getFirstName() {
         return firstName;

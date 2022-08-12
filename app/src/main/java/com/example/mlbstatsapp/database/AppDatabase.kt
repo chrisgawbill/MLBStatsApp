@@ -9,7 +9,8 @@ import androidx.room.RoomDatabase
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun getTeamDao(): TeamDao
-
+    abstract fun getBatterDao():BatterDao
+    abstract fun getPitcherDao():PitcherDao
 
 
 

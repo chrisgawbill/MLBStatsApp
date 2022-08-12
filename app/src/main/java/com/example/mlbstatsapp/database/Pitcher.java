@@ -9,6 +9,8 @@ public class Pitcher implements Player{
 
     @PrimaryKey(autoGenerate = true)
     private int id;
+    @ColumnInfo(name = "player-id")
+    private String playerId;
     @ColumnInfo(name= "first-name")
     private String firstName;
     @ColumnInfo(name= "last-name")
@@ -28,7 +30,8 @@ public class Pitcher implements Player{
     @ColumnInfo(name= "losses")
     private int losses;
 
-    public Pitcher(String firstName, String lastName, String hometown, String team, String bats, String handThrows, float era, int wins, int losses) {
+    public Pitcher(String playerId, String firstName, String lastName, String hometown, String team, String bats, String handThrows, float era, int wins, int losses) {
+        this.playerId = playerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.hometown = hometown;
@@ -47,6 +50,10 @@ public class Pitcher implements Player{
     public void setId(int id){
         this.id= id;
     }
+
+    public String getPlayerId(){return playerId;}
+
+    public void setPlayerId(String playerId){this.playerId = playerId;}
 
     public String getFirstName() {
         return firstName;

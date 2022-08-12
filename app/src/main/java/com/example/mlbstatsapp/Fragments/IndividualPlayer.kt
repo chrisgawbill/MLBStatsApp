@@ -1,5 +1,7 @@
 package com.example.mlbstatsapp.Fragments
 
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Binder
 import android.os.Bundle
 import android.util.Log
@@ -7,17 +9,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.example.mlbstatsapp.*
 import com.example.mlbstatsapp.ApiModels.PlayerHittingStats
 import com.example.mlbstatsapp.ApiModels.PlayerPitchingStat
-import com.example.mlbstatsapp.BR
-import com.example.mlbstatsapp.R
-import com.example.mlbstatsapp.IndividualPlayerViewModel
-import com.example.mlbstatsapp.PlayerApiModel
+import com.example.mlbstatsapp.database.Batter
+import com.example.mlbstatsapp.database.Pitcher
 import com.example.mlbstatsapp.databinding.FragmentIndividualPlayerBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,6 +42,11 @@ class IndividualPlayer : Fragment() {
     lateinit var hittingStatsLayout:ConstraintLayout
     lateinit var pitchingStatsLayout: ConstraintLayout
 
+    lateinit var favoriteIcon:ImageButton
+
+    var playerId:Int = 0
+    var playerPosition:String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -58,8 +66,8 @@ class IndividualPlayer : Fragment() {
         pitchingStatsLayout = view.findViewById(R.id.pitchingStatConstraintLayout)
 
         val safeArgs: IndividualPlayerArgs by navArgs()
-        val playerId = safeArgs.playerId
-        val playerPosition = safeArgs.playerPosition
+        playerId = safeArgs.playerId
+        playerPosition = safeArgs.playerPosition
         val playerFirstName = safeArgs.playerFirstName
         val playerLastName = safeArgs.playerLastName
         val playerHeight = safeArgs.playerHeight
@@ -74,6 +82,12 @@ class IndividualPlayer : Fragment() {
         Log.d(IndividualPlayer::class.java.simpleName, playerId.toString())
         Log.d(IndividualPlayer::class.java.simpleName, playerPosition)
         makeStatsApiCall(playerId,playerPosition, bind, view, safeArgs)
+
+        favoriteIcon = view.findViewById(R.id.favoritePlayerImageButton)
+        setFavoriteImageButton(playerId, playerPosition, view)
+        favoriteIcon.setOnClickListener(View.OnClickListener {
+            favoriteIconButtonClick()
+        })
 
         return view
     }
@@ -131,5 +145,57 @@ class IndividualPlayer : Fragment() {
             }
         })
         individualPlayerViewModel.getPlayerPitchingStats(playerIdParam)
+    }
+    fun setFavoriteImageButton(playerIdParam:Int, playerPositionParam: String, viewParam:View){
+        var isFavorite:Boolean = false
+        var pitcherFavorite:Pitcher? = null
+        var batterFavorite:Batter? = null
+        Log.d(IndividualPlayer::class.java.simpleName, playerIdParam.toString())
+        val db = LoadData.getInstance(activity?.applicationContext ?: activity?.applicationContext)
+        if(playerPositionParam == "P"){
+            pitcherFavorite = db.getPitcher(playerIdParam.toString())
+        }else{
+            batterFavorite = db.getBatter(playerIdParam.toString())
+        }
+
+        if(pitcherFavorite == null && batterFavorite == null){
+            Log.d(IndividualPlayer::class.java.simpleName, "Player is not a favorite")
+            favoriteIcon.setImageResource(R.drawable.non_favorited_player_icon)
+            favoriteIcon.setTag(R.id.favoritePlayerImageButton,"Not Favorite")
+        }else{
+            Log.d(IndividualPlayer::class.java.simpleName, "Player was a favorite")
+            favoriteIcon.setImageResource(R.drawable.favorited_player_icon)
+            favoriteIcon.setTag(R.id.favoritePlayerImageButton, "Favorite")
+        }
+    }
+    fun favoriteIconButtonClick(){
+        var tag = favoriteIcon.getTag(R.id.favoritePlayerImageButton)
+        if(tag.equals("Favorite")){
+            favoriteIcon.setImageResource(R.drawable.non_favorited_player_icon)
+            favoriteIcon.setTag(R.id.favoritePlayerImageButton, "Not Favorited")
+            deleteFavoriteFromDB()
+        }else{
+            favoriteIcon.setImageResource(R.drawable.favorited_player_icon)
+            favoriteIcon.setTag(R.id.favoritePlayerImageButton, "Favorite")
+            insertFavoriteIntoDB()
+        }
+    }
+    fun insertFavoriteIntoDB(){
+        val db = LoadData.getInstance(activity?.applicationContext ?: activity?.applicationContext)
+        if(playerPosition == "P"){
+            var pitcher:Pitcher = Pitcher(playerId.toString(),null,null,null,null,null,null, 0.0F,0,0)
+            db.insertPitcher(pitcher)
+        }else{
+            var batter:Batter = Batter(playerId.toString(),null,null,null,null,null,null,null,0,0,0.0F)
+            db.insertBatter(batter)
+        }
+    }
+    fun deleteFavoriteFromDB(){
+        val db = LoadData.getInstance(activity?.applicationContext ?: activity?.applicationContext)
+        if(playerPosition == "P"){
+            db.deletePitcher(playerId.toString())
+        }else{
+            db.deleteBatter(playerId.toString())
+        }
     }
 }

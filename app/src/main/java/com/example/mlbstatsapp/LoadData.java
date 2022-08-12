@@ -13,6 +13,8 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.mlbstatsapp.database.AppDatabase;
+import com.example.mlbstatsapp.database.Batter;
+import com.example.mlbstatsapp.database.Pitcher;
 import com.example.mlbstatsapp.database.Player;
 import com.example.mlbstatsapp.database.Team;
 //import com.example.mlbstatsapp.di.AppComponent;
@@ -23,6 +25,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 //@RequiresApi(api = Build.VERSION_CODES.O)
@@ -263,6 +267,22 @@ public class LoadData extends AppCompatActivity {
 
 
     }
+    public Batter getBatter(String id){
+        return appDb.getBatterDao().findBatter(id);
+    }
+    public List<Batter> getAllBatters(){
+        return appDb.getBatterDao().getAllBatters();
+    }
+    public void insertBatter(Batter batter){appDb.getBatterDao().insertBatter(batter);}
+    public void deleteBatter(String id){appDb.getBatterDao().deleteBatter(id);}
+    public Pitcher getPitcher(String id){
+        return appDb.getPitcherDao().findPitcher(id);
+    }
+    public List<Pitcher> getAllPitchers(){
+        return appDb.getPitcherDao().getAllPitchers();
+    }
+    public void insertPitcher(Pitcher pitcher){appDb.getPitcherDao().insertPitcher(pitcher);}
+    public void deletePitcher(String id){appDb.getPitcherDao().deletePitcher(id);}
 
 
 }
