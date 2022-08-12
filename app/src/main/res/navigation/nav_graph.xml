@@ -7,16 +7,74 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.mlbstatsapp.HomeFragment"
+        android:name= "com.example.mlbstatsapp.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_playerSearchResultsFragment"
             app:destination="@id/playerSearchResultsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_teamsListFragment"
+            app:destination="@id/teamsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/playerSearchResultsFragment"
-        android:name="com.example.mlbstatsapp.PlayerSearchResultsFragment"
+        android:name="com.example.mlbstatsapp.Fragments.PlayerSearchResultsFragment"
         android:label="fragment_player_search_results"
-        tools:layout="@layout/fragment_player_search_results" />
+        tools:layout="@layout/fragment_player_search_results" >
+        <action
+            android:id="@+id/action_playerSearchResultsFragment_to_individualPlayer"
+            app:destination="@id/individualPlayer" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.mlbstatsapp.Fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/teamsListFragment"
+        android:name="com.example.mlbstatsapp.Fragments.TeamsListFragment"
+        android:label="fragment_teams_list"
+        tools:layout="@layout/fragment_teams_list" />
+    <fragment
+        android:id="@+id/individualPlayer"
+        android:name="com.example.mlbstatsapp.Fragments.IndividualPlayer"
+        android:label="fragment_individual_player"
+        tools:layout="@layout/fragment_individual_player" >
+        <argument
+            android:name="player_first_name"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="player_last_name"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="player_position"
+            android:defaultValue="Placeholder"></argument>
+        <argument
+            android:name="player_id"
+            android:defaultValue="0">
+        </argument>
+        <argument
+            android:name="player_height"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="player_weight"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="player_college"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="player_high_school"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="player_current_team"
+            android:defaultValue="Placeholder">
+        </argument>
+    </fragment>
 </navigation>

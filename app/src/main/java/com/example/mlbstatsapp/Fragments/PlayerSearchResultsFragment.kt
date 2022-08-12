@@ -1,4 +1,4 @@
-package com.example.mlbstatsapp
+package com.example.mlbstatsapp.Fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -7,12 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mlbstatsapp.BR
+import com.example.mlbstatsapp.PlayerApiModel
+import com.example.mlbstatsapp.PlayerList
+import com.example.mlbstatsapp.R
+import com.example.mlbstatsapp.HomePlayerSearchSharedViewModel
+import com.example.mlbstatsapp.HomeViewModel
 import com.example.mlbstatsapp.databinding.FragmentPlayerSearchResultsBinding
+import com.google.gson.Gson
+import java.lang.reflect.GenericArrayType
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +36,7 @@ class PlayerSearchResultsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    lateinit var sharedViewModel:HomePlayerSearchSharedViewModel
+    lateinit var sharedViewModel: HomePlayerSearchSharedViewModel
     lateinit var searchTerm:String
 
     lateinit var playerSearchResultsRecycler:RecyclerView
@@ -51,7 +58,7 @@ class PlayerSearchResultsFragment : Fragment() {
         var view = bind.root
 
         val viewModel = makeApiCall(view)
-        bind.setVariable(BR.viewModel, viewModel)
+        bind.setVariable(BR.homeViewModel, viewModel)
         bind.executePendingBindings()
 
         playerSearchResultsRecycler = view.findViewById(R.id.playerSearchResultsRecyclerView)
@@ -81,8 +88,8 @@ class PlayerSearchResultsFragment : Fragment() {
                 }
             }
     }
-    fun makeApiCall(view:View):HomeViewModel{
-        var homeView:HomeViewModel = HomeViewModel()
+    fun makeApiCall(view:View): HomeViewModel {
+        var homeView: HomeViewModel = HomeViewModel()
         sharedViewModel = activity?.run {
             ViewModelProviders.of(this).get(HomePlayerSearchSharedViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
@@ -91,7 +98,22 @@ class PlayerSearchResultsFragment : Fragment() {
              homeView.getPlayerSearchResultsDataObserver().observe(viewLifecycleOwner,Observer<PlayerList>{
                 if(it != null){
                     Log.d(PlayerSearchResultsFragment::class.java.simpleName, it.row.toString())
-                    homeView.setAdapterData(it.row as ArrayList<PlayerApiModel>)
+                    var playerArrayList:ArrayList<PlayerApiModel> = ArrayList()
+                    if(it.totalSize.toInt() > 1){
+                        var genericArray = it.row as ArrayList<GenericArrayType>
+                        for(i in 0..(genericArray.size)-1){
+                            var json = Gson().toJson(genericArray.get(i))
+                            var playerObjet = Gson().fromJson(json, PlayerApiModel::class.java)
+                            playerArrayList.add(playerObjet)
+                        }
+                    }else{
+                        var json = Gson().toJson(it.row)
+                        var playerObject = Gson().fromJson(json, PlayerApiModel::class.java)
+                        playerArrayList.add(playerObject)
+                    }
+                    Log.d(PlayerSearchResultsFragment::class.java.simpleName, playerArrayList.toString())
+                    homeView.setAdapterData(playerArrayList)
+
                 }else{
                     Log.d(PlayerSearchResultsFragment::class.java.simpleName, "SOMETHING WENT WRONG")
                     Toast.makeText(view.context, "Error something went wrong with data", Toast.LENGTH_SHORT).show()

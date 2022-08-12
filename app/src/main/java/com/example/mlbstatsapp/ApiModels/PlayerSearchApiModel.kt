@@ -1,5 +1,8 @@
 package com.example.mlbstatsapp
 
+import com.google.gson.internal.LinkedTreeMap
+import java.lang.reflect.Type
+
 data class PlayerSearchApiModel(
     val search_player_all:SearchPlayerAll
 )
@@ -7,11 +10,10 @@ data class SearchPlayerAll(
     val copyRight:String,
     val queryResults:PlayerList
 )
-
 data class PlayerList(
     val created:String,
     val totalSize:String,
-    val row: List<PlayerApiModel>
+    val row: Any
 )
 data class PlayerApiModel(
     val position:String,

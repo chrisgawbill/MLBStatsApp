@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
@@ -24,7 +23,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment() {
+public class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -75,22 +74,11 @@ class HomeFragment : Fragment() {
             }
     }
     fun playerSearchClick(playerSearchParam:String, view:View){
-
         sharedViewModel = activity?.run{
             ViewModelProviders.of(this).get(HomePlayerSearchSharedViewModel::class.java)
-
-
         }?: throw Exception("Invalid Activity")
-
         sharedViewModel.playerSearchTerm.value = playerSearchParam
 
-        // Just for testing purposes to verify the button is execution this function.   Comment out before deployment
-        val toast= Toast.makeText(context, "This also works", Toast.LENGTH_SHORT)
-        toast.show()
-
-
-        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_playerSearchResultsFragment);
-
-
+        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_playerSearchResultsFragment)
     }
 }

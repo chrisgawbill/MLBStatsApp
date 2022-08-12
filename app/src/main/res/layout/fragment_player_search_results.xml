@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="viewModel"
+            name="homeViewModel"
             type="com.example.mlbstatsapp.HomeViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +25,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:setAdapter="@{viewModel.getAdapter()}"/>
+            app:setAdapter="@{homeViewModel.getAdapter()}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
