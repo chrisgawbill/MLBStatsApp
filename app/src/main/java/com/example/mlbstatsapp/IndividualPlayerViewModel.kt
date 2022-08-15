@@ -16,7 +16,6 @@ import java.text.FieldPosition
 class IndividualPlayerViewModel{
     var playerHittingStatsLiveData:MutableLiveData<PlayerHittingStats> = MutableLiveData()
     var playerPitchingStatsLiveData:MutableLiveData<PlayerPitchingStat> = MutableLiveData()
-    var errorAction:MutableLiveData<Int> = MutableLiveData()
 
     var playerPosition:MutableLiveData<String> = MutableLiveData()
     var playerFirstName:MutableLiveData<String> = MutableLiveData()
@@ -46,9 +45,6 @@ class IndividualPlayerViewModel{
     }
     fun getPlayerPitchingStatsData():MutableLiveData<PlayerPitchingStat>{
         return playerPitchingStatsLiveData
-    }
-    fun getErrorMessageData():MutableLiveData<Int>{
-        return errorAction
     }
     fun getPlayerHittingStats(playerID:Int){
         val mlbApi = RetrofitHelper.getInstance().create(MlbApi::class.java)
@@ -112,7 +108,6 @@ class IndividualPlayerViewModel{
                         playerPitchingStatsLiveData.postValue(playerPitchingStats)
                     }catch(e:Exception){
                         Log.d(IndividualPlayerViewModel::class.java.simpleName, "Error while processing")
-                        errorAction.postValue(1)
                     }
                 }else{
                     Log.d(HomeViewModel::class.java.simpleName, "NOTHING WAS RETURNED")

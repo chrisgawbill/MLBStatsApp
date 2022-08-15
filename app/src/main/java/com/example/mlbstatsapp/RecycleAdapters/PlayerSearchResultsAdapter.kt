@@ -26,7 +26,7 @@ class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapte
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerSearchViewHolder {
         var layoutInflater = LayoutInflater.from(parent.context)
-        var rowBinding = PlayerSearchResultsRowBinding.inflate(layoutInflater,parent, false)
+        var rowBinding = com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding.inflate(layoutInflater,parent, false)
         return PlayerSearchViewHolder(rowBinding)
     }
 
