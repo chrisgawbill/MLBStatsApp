@@ -130,7 +130,7 @@ class IndividualPlayerViewModel{
             val loses = playerPitchingStatsLiveData.value!!.l.toInt()
 
             val pitcher:Pitcher = Pitcher(playerId, playerFirstName.value.toString(), playerLastName.value.toString(),playerHometown.value.toString(),
-            playerCurrentTeam.value.toString(), playerBats.value.toString(), playerThrows.value.toString(),era, wins, loses)
+            playerHeight.value.toString(), playerWeight.value.toString(), playerCurrentTeam.value.toString(), playerBats.value.toString(), playerThrows.value.toString(),era, wins, loses)
             db.insertPitcher(pitcher)
         }else{
             val hr = playerHittingStatsLiveData.value!!.hr.toInt()
@@ -138,7 +138,7 @@ class IndividualPlayerViewModel{
             val ba = playerHittingStatsLiveData.value!!.babip.toFloat()
 
             val batter:Batter = Batter(playerId, playerFirstName.value.toString(), playerLastName.value.toString(),playerHometown.value.toString(),
-                playerCurrentTeam.value.toString(), playerBats.value.toString(), playerThrows.value.toString(), playerPosition.value.toString(), hr, rbi, ba)
+               playerHeight.value.toString(), playerWeight.value.toString(), playerCurrentTeam.value.toString(), playerBats.value.toString(), playerThrows.value.toString(), playerPosition.value.toString(), hr, rbi, ba)
             db.insertBatter(batter)
         }
     }

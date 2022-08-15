@@ -17,6 +17,10 @@ public class Pitcher implements Player{
     private String lastName;
     @ColumnInfo(name= "hometown")
     private String hometown;
+    @ColumnInfo(name="height")
+    private String height;
+    @ColumnInfo(name="weight")
+    private String weight;
     @ColumnInfo(name= "team")
     private String team;
     @ColumnInfo(name= "bats")
@@ -30,11 +34,13 @@ public class Pitcher implements Player{
     @ColumnInfo(name= "losses")
     private int losses;
 
-    public Pitcher(String playerId, String firstName, String lastName, String hometown, String team, String bats, String handThrows, float era, int wins, int losses) {
+    public Pitcher(String playerId, String firstName, String lastName, String hometown,String height, String weight, String team, String bats, String handThrows, float era, int wins, int losses) {
         this.playerId = playerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.hometown = hometown;
+        this.height = height;
+        this.weight = weight;
         this.team = team;
         this.bats = bats;
         this.handThrows = handThrows;
@@ -78,6 +84,14 @@ public class Pitcher implements Player{
     public void setHometown(String hometown) {
         this.hometown = hometown;
     }
+
+    public String getHeight(){return height;}
+
+    public void setHeight(String height){this.height = height;}
+
+    public String getWeight(){return weight;}
+
+    public void setWeight(String weight){this.weight = weight;}
 
     public String getTeam() {
         return team;

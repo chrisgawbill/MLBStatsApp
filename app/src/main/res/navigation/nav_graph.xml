@@ -15,8 +15,8 @@
             android:id="@+id/action_homeFragment_to_playerSearchResultsFragment"
             app:destination="@id/playerSearchResultsFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_teamsListFragment"
-            app:destination="@id/teamsListFragment" />
+            android:id="@+id/action_homeFragment_to_individualPlayer"
+            app:destination="@id/individualPlayer" />
     </fragment>
     <fragment
         android:id="@+id/playerSearchResultsFragment"

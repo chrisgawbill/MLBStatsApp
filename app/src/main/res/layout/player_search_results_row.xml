@@ -15,6 +15,7 @@
             android:id="@+id/playerSearchResultsNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:layout_marginStart="45dp"
             android:text="@{playerApiModel.name_display_first_last}"
             app:layout_constraintBottom_toBottomOf="parent"
