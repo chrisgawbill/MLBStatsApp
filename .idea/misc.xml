@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/959157/AndroidStudioProjects/MlbStatsApp/app/src/main/res/drawable/favorited_player_icon.xml" value="0.1" />
+        <entry key="..\:/Users/959157/AndroidStudioProjects/MlbStatsApp/app/src/main/res/drawable/non_favorited_player_icon.xml" value="0.1" />
         <entry key="..\:/Users/959157/AndroidStudioProjects/MlbStatsApp/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
         <entry key="..\:/Users/959157/AndroidStudioProjects/MlbStatsApp/app/src/main/res/layout/batter_recycler_row.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/959157/AndroidStudioProjects/MlbStatsApp/app/src/main/res/layout/fragment_home.xml" value="0.1796875" />
-        <entry key="..\:/Users/959157/AndroidStudioProjects/MlbStatsApp/app/src/main/res/layout/fragment_individual_player.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/959157/AndroidStudioProjects/MlbStatsApp/app/src/main/res/layout/fragment_individual_player.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/959157/AndroidStudioProjects/MlbStatsApp/app/src/main/res/layout/fragment_player_search_results.xml" value="0.1" />
         <entry key="..\:/Users/959157/AndroidStudioProjects/MlbStatsApp/app/src/main/res/layout/pitcher_recycler_row.xml" value="0.1" />
         <entry key="..\:/Users/959157/AndroidStudioProjects/MlbStatsApp/app/src/main/res/layout/player_search_results_row.xml" value="0.1796875" />

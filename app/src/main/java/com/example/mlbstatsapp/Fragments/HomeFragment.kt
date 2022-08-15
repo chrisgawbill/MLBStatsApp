@@ -125,22 +125,26 @@ public class HomeFragment : Fragment() {
             favoritePlayersConstraintLayout.isVisible = false
             favoriteBatterRecycler.adapter = null
             favoritePitcherRecycler.adapter = null
-        }else if(batterList.isEmpty()){
+        }
+        if(batterList.isEmpty()){
             favoriteBattersConstraintLayout.isVisible = false
             favoriteBatterRecycler.adapter = null
-        }else if(pitcherList.isEmpty()){
+        }
+        if(pitcherList.isEmpty()){
             favoritePitchersConstraintLayout.isVisible = false
             favoritePitcherRecycler.adapter = null
-        }else if(batterList.isNotEmpty()){
+        }
+        if(batterList.isNotEmpty()){
             val layout:LinearLayoutManager = LinearLayoutManager(view.context)
             favoriteBatterRecycler.layoutManager = layout
-            val adapter = FavoriteBattersAdapter(batterList)
-            favoriteBatterRecycler.adapter = adapter
-        }else if(pitcherList.isNotEmpty()) {
+            val batterAdapter = FavoriteBattersAdapter(batterList)
+            favoriteBatterRecycler.adapter = batterAdapter
+        }
+        if(pitcherList.isNotEmpty()) {
             val layout:LinearLayoutManager = LinearLayoutManager(view.context)
             favoritePitcherRecycler.layoutManager = layout
-            val adapter = FavoritePitcherAdapter(pitcherList)
-            favoritePitcherRecycler.adapter = adapter
+            val pitcherAdapter = FavoritePitcherAdapter(pitcherList)
+            favoritePitcherRecycler.adapter = pitcherAdapter
         }
     }
 }
