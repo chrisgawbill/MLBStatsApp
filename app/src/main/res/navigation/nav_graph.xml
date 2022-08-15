@@ -80,5 +80,8 @@
             android:name="player_current_team"
             android:defaultValue="Placeholder">
         </argument>
+        <action
+            android:id="@+id/action_individualPlayer_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

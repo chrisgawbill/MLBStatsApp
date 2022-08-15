@@ -2,6 +2,7 @@ package com.example.mlbstatsapp
 
 import android.app.Activity
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import com.example.mlbstatsapp.ApiModels.*
@@ -9,11 +10,13 @@ import com.example.mlbstatsapp.database.Batter
 import com.example.mlbstatsapp.database.Pitcher
 import retrofit2.Call
 import retrofit2.Response
+import java.lang.Exception
 import java.text.FieldPosition
 
 class IndividualPlayerViewModel{
     var playerHittingStatsLiveData:MutableLiveData<PlayerHittingStats> = MutableLiveData()
     var playerPitchingStatsLiveData:MutableLiveData<PlayerPitchingStat> = MutableLiveData()
+    var errorAction:MutableLiveData<Int> = MutableLiveData()
 
     var playerPosition:MutableLiveData<String> = MutableLiveData()
     var playerFirstName:MutableLiveData<String> = MutableLiveData()
@@ -43,6 +46,9 @@ class IndividualPlayerViewModel{
     }
     fun getPlayerPitchingStatsData():MutableLiveData<PlayerPitchingStat>{
         return playerPitchingStatsLiveData
+    }
+    fun getErrorMessageData():MutableLiveData<Int>{
+        return errorAction
     }
     fun getPlayerHittingStats(playerID:Int){
         val mlbApi = RetrofitHelper.getInstance().create(MlbApi::class.java)
@@ -94,13 +100,20 @@ class IndividualPlayerViewModel{
             }
             override fun onResponse(call: Call<PlayerPitchingApiModel>, response: Response<PlayerPitchingApiModel>){
                 if(response.isSuccessful){
-                    var apiModel: PlayerPitchingApiModel = response.body() as PlayerPitchingApiModel
-                    var playerPitchingModel: PitchingStatsQuery = apiModel.sport_pitching_tm
-                    var pitchingStatResult: PitchingStatResult = playerPitchingModel.queryResults
-                    var playerPitchingStats:PlayerPitchingStat = pitchingStatResult.row
-                    Log.d(HomeViewModel::class.java.simpleName, response.body().toString())
-                    Log.d(HomeViewModel::class.java.simpleName, playerPitchingStats.toString())
-                    playerPitchingStatsLiveData.postValue(playerPitchingStats)
+                    try {
+                        var apiModel: PlayerPitchingApiModel =
+                            response.body() as PlayerPitchingApiModel
+                        var playerPitchingModel: PitchingStatsQuery = apiModel.sport_pitching_tm
+                        var pitchingStatResult: PitchingStatResult =
+                            playerPitchingModel.queryResults
+                        var playerPitchingStats: PlayerPitchingStat = pitchingStatResult.row
+                        Log.d(HomeViewModel::class.java.simpleName, response.body().toString())
+                        //Log.d(HomeViewModel::class.java.simpleName, playerPitchingStats.toString())
+                        playerPitchingStatsLiveData.postValue(playerPitchingStats)
+                    }catch(e:Exception){
+                        Log.d(IndividualPlayerViewModel::class.java.simpleName, "Error while processing")
+                        errorAction.postValue(1)
+                    }
                 }else{
                     Log.d(HomeViewModel::class.java.simpleName, "NOTHING WAS RETURNED")
                 }

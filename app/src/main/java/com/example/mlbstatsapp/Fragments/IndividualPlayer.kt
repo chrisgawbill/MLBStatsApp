@@ -15,6 +15,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.mlbstatsapp.*
 import com.example.mlbstatsapp.ApiModels.PlayerHittingStats
@@ -140,6 +141,14 @@ class IndividualPlayer : Fragment() {
             individualPlayerViewModel.getPlayerHittingStats(playerIdParam)
         }
     fun makePitchingStatsCall(playerIdParam:Int, bindParam:FragmentIndividualPlayerBinding, viewParam:View){
+        individualPlayerViewModel.getErrorMessageData().observe(viewLifecycleOwner, Observer<Int>{
+            if(it == 1){
+                Navigation.findNavController(viewParam).navigate(R.id.action_individualPlayer_to_homeFragment)
+            }else{
+                Log.d(PlayerSearchResultsFragment::class.java.simpleName, "SOMETHING WENT WRONG")
+                //Toast.makeText(viewParam.context, "Error something went wrong with data", Toast.LENGTH_SHORT).show()
+            }
+        })
         individualPlayerViewModel.getPlayerPitchingStatsData().observe(viewLifecycleOwner, Observer<PlayerPitchingStat>{
             if(it != null){
                 Log.d(PlayerSearchResultsFragment::class.java.simpleName, (it as PlayerPitchingStat).toString())

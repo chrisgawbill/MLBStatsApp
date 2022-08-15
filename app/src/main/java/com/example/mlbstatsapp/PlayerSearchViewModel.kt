@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.mlbstatsapp.RecycleAdapters.PlayerSearchResultsAdapter
 import retrofit2.Call
 import retrofit2.Response
+import java.lang.Exception
 
 class PlayerSearchViewModel(): ViewModel() {
     var playerSearchResults:MutableLiveData<PlayerList> = MutableLiveData()
@@ -40,12 +41,19 @@ class PlayerSearchViewModel(): ViewModel() {
             @SuppressLint("NullSafeMutableLiveData")
             override fun onResponse(call:Call<PlayerSearchApiModel>, response: Response<PlayerSearchApiModel>){
                 if(response.isSuccessful){
-                    var apiModel: PlayerSearchApiModel = response.body() as PlayerSearchApiModel
-                    var searchPlayerAll: SearchPlayerAll = apiModel.search_player_all
-                    var playerList: PlayerList = searchPlayerAll.queryResults
-                    Log.d(PlayerSearchViewModel::class.java.simpleName, response.body().toString())
-                    Log.d(PlayerSearchViewModel::class.java.simpleName, playerList.toString())
-                    playerSearchResults.postValue(playerList)
+                    try {
+                        var apiModel: PlayerSearchApiModel = response.body() as PlayerSearchApiModel
+                        var searchPlayerAll: SearchPlayerAll = apiModel.search_player_all
+                        var playerList: PlayerList = searchPlayerAll.queryResults
+                        Log.d(
+                            PlayerSearchViewModel::class.java.simpleName,
+                            response.body().toString()
+                        )
+                        Log.d(PlayerSearchViewModel::class.java.simpleName, playerList.toString())
+                        playerSearchResults.postValue(playerList)
+                    }catch (e:Exception){
+                        Log.d(PlayerSearchViewModel::class.java.simpleName, "Something went wrong during processing")
+                    }
                 }else{
                     Log.d(PlayerSearchViewModel::class.java.simpleName, "NOTHING WAS RETURNED")
                 }
