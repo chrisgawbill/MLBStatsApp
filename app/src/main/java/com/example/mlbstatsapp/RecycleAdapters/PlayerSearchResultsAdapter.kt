@@ -14,7 +14,8 @@ import com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding
 
 class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapter.PlayerSearchViewHolder>() {
     var playerSearchArray:ArrayList<PlayerApiModel> = ArrayList()
-    class PlayerSearchViewHolder(val binding: com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding) : RecyclerView.ViewHolder(binding.root) {
+    class PlayerSearchViewHolder(val binding: PlayerSearchResultsRowBinding) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(data: PlayerApiModel){
             binding.playerApiModel = data
             binding.executePendingBindings()
@@ -25,7 +26,7 @@ class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapte
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerSearchViewHolder {
         var layoutInflater = LayoutInflater.from(parent.context)
-        var rowBinding = PlayerSearchResultsRowBinding.inflate(layoutInflater)
+        var rowBinding = PlayerSearchResultsRowBinding.inflate(layoutInflater,parent, false)
         return PlayerSearchViewHolder(rowBinding)
     }
 
