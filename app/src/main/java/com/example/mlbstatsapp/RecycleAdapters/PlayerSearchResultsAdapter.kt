@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mlbstatsapp.Fragments.IndividualPlayerArgs
@@ -14,7 +13,8 @@ import com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding
 
 class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapter.PlayerSearchViewHolder>() {
     var playerSearchArray:ArrayList<PlayerApiModel> = ArrayList()
-    class PlayerSearchViewHolder(val binding: com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding) : RecyclerView.ViewHolder(binding.root) {
+    class PlayerSearchViewHolder(val binding: PlayerSearchResultsRowBinding) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(data: PlayerApiModel){
             binding.playerApiModel = data
             binding.executePendingBindings()
@@ -25,7 +25,7 @@ class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapte
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerSearchViewHolder {
         var layoutInflater = LayoutInflater.from(parent.context)
-        var rowBinding = PlayerSearchResultsRowBinding.inflate(layoutInflater)
+        var rowBinding = com.example.mlbstatsapp.databinding.PlayerSearchResultsRowBinding.inflate(layoutInflater,parent, false)
         return PlayerSearchViewHolder(rowBinding)
     }
 
@@ -50,8 +50,9 @@ class PlayerSearchResultsAdapter: RecyclerView.Adapter<PlayerSearchResultsAdapte
         action.playerPosition = player.position
         action.playerHeight = player.height_feet
         action.playerWeight = player.weight
-        action.playerCollege = player.college
-        action.playerHighSchool = player.high_school
+        action.playerBats = player.bats
+        action.playerThrows = player.throws
+        action.playerHometown = player.birth_city + ", " +  player.birth_country
         action.playerCurrentTeam = player.team_full
         Navigation.findNavController(view).navigate(action)
     }

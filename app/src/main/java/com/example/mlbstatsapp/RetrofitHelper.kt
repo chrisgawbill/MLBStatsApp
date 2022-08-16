@@ -1,8 +1,10 @@
 package com.example.mlbstatsapp
 
+import com.example.mlbstatsapp.RetrofitHelper.gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 
 object RetrofitHelper {

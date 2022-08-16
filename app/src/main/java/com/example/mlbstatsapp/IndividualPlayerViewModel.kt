@@ -1,10 +1,16 @@
 package com.example.mlbstatsapp
 
+import android.app.Activity
 import android.util.Log
+import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import com.example.mlbstatsapp.ApiModels.*
+import com.example.mlbstatsapp.database.Batter
+import com.example.mlbstatsapp.database.Pitcher
 import retrofit2.Call
 import retrofit2.Response
+import java.lang.Exception
 import java.text.FieldPosition
 
 class IndividualPlayerViewModel{
@@ -17,20 +23,22 @@ class IndividualPlayerViewModel{
     var playerWeight:MutableLiveData<String> = MutableLiveData()
     var playerHeight:MutableLiveData<String> = MutableLiveData()
     var playerCurrentTeam:MutableLiveData<String> = MutableLiveData()
-    var playerHighSchool:MutableLiveData<String> = MutableLiveData()
-    var playerCollege:MutableLiveData<String> = MutableLiveData()
+    var playerThrows:MutableLiveData<String> = MutableLiveData()
+    var playerBats:MutableLiveData<String> = MutableLiveData()
+    var playerHometown:MutableLiveData<String> = MutableLiveData()
 
     fun setGeneralPlayerInfo(playerPositionParam:String, playerFirstNameParam:String, playerLastNameParam:String,
-    playerHeightParam:String, playerWeightParam:String, playerCurrentTeamParam:String, playerHighSchoolParam:String,
-    playerCollegeParam:String){
+    playerHeightParam:String, playerWeightParam:String, playerCurrentTeamParam:String, playerThrowsParam:String,
+    playerBatsParam:String, playerHometownParam:String){
         playerPosition.value = playerPositionParam
         playerFirstName.value = playerFirstNameParam
         playerLastName.value = playerLastNameParam
         playerWeight.value = playerWeightParam
         playerHeight.value = playerHeightParam
         playerCurrentTeam.value = playerCurrentTeamParam
-        playerHighSchool.value = playerHighSchoolParam
-        playerCollege.value = playerCollegeParam
+        playerThrows.value = playerThrowsParam
+        playerBats.value = playerBatsParam
+        playerHometown.value = playerHometownParam
     }
     fun getPlayerHittingStatsData():MutableLiveData<PlayerHittingStats>{
         return playerHittingStatsLiveData
@@ -88,13 +96,19 @@ class IndividualPlayerViewModel{
             }
             override fun onResponse(call: Call<PlayerPitchingApiModel>, response: Response<PlayerPitchingApiModel>){
                 if(response.isSuccessful){
-                    var apiModel: PlayerPitchingApiModel = response.body() as PlayerPitchingApiModel
-                    var playerPitchingModel: PitchingStatsQuery = apiModel.sport_pitching_tm
-                    var pitchingStatResult: PitchingStatResult = playerPitchingModel.queryResults
-                    var playerPitchingStats:PlayerPitchingStat = pitchingStatResult.row
-                    Log.d(HomeViewModel::class.java.simpleName, response.body().toString())
-                    Log.d(HomeViewModel::class.java.simpleName, playerPitchingStats.toString())
-                    playerPitchingStatsLiveData.postValue(playerPitchingStats)
+                    try {
+                        var apiModel: PlayerPitchingApiModel =
+                            response.body() as PlayerPitchingApiModel
+                        var playerPitchingModel: PitchingStatsQuery = apiModel.sport_pitching_tm
+                        var pitchingStatResult: PitchingStatResult =
+                            playerPitchingModel.queryResults
+                        var playerPitchingStats: PlayerPitchingStat = pitchingStatResult.row
+                        Log.d(HomeViewModel::class.java.simpleName, response.body().toString())
+                        //Log.d(HomeViewModel::class.java.simpleName, playerPitchingStats.toString())
+                        playerPitchingStatsLiveData.postValue(playerPitchingStats)
+                    }catch(e:Exception){
+                        Log.d(IndividualPlayerViewModel::class.java.simpleName, "Error while processing")
+                    }
                 }else{
                     Log.d(HomeViewModel::class.java.simpleName, "NOTHING WAS RETURNED")
                 }
@@ -102,6 +116,34 @@ class IndividualPlayerViewModel{
             }
         })
 
+    }
+    fun insertFavoriteIntoDb(activity:FragmentActivity?, playerId:String){
+        val db = LoadData.getInstance(activity?.applicationContext ?: activity?.applicationContext)
+        if(playerPosition.value == "P"){
+            val era = playerPitchingStatsLiveData.value!!.era.toFloat()
+            val wins = playerPitchingStatsLiveData.value!!.w.toInt()
+            val loses = playerPitchingStatsLiveData.value!!.l.toInt()
+
+            val pitcher:Pitcher = Pitcher(playerId, playerFirstName.value.toString(), playerLastName.value.toString(),playerHometown.value.toString(),
+            playerHeight.value.toString(), playerWeight.value.toString(), playerCurrentTeam.value.toString(), playerBats.value.toString(), playerThrows.value.toString(),era, wins, loses)
+            db.insertPitcher(pitcher)
+        }else{
+            val hr = playerHittingStatsLiveData.value!!.hr.toInt()
+            val rbi = playerHittingStatsLiveData.value!!.rbi.toInt()
+            val ba = playerHittingStatsLiveData.value!!.babip.toFloat()
+
+            val batter:Batter = Batter(playerId, playerFirstName.value.toString(), playerLastName.value.toString(),playerHometown.value.toString(),
+               playerHeight.value.toString(), playerWeight.value.toString(), playerCurrentTeam.value.toString(), playerBats.value.toString(), playerThrows.value.toString(), playerPosition.value.toString(), hr, rbi, ba)
+            db.insertBatter(batter)
+        }
+    }
+    fun deleteFavoritePlayerFromDb(activity: FragmentActivity?, playerId:String){
+        val db = LoadData.getInstance(activity?.applicationContext ?: activity?.applicationContext)
+        if(playerPosition.value == "P"){
+            db.deletePitcher(playerId)
+        }else{
+            db.deleteBatter(playerId)
+        }
     }
 
 }

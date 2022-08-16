@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:title="@string/nav_home"
-        android:icon="@drawable/ic_bottom_nav_home"/>
+        android:icon="@drawable/nav_home"
+        android:title="@string/nav_home"/>
     <item
         android:id="@+id/teamsListFragment"
-        android:title="@string/nav_teams"
-        android:icon="@drawable/ic_bottom_nav_team_list"/>
+        android:icon="@drawable/nav_team_list"
+        android:title="@string/nav_teams"/>
     <item
         android:id="@+id/settingsFragment"
-        android:title="@string/nav_settings"
-        android:icon="@drawable/ic_bottom_nav_settings"/>
+        android:icon="@drawable/nav_settings"
+        android:title="@string/nav_settings"/>
 </menu>

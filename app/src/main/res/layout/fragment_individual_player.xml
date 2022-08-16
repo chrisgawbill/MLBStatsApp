@@ -20,6 +20,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="13dp"
             android:text="@{playerStats.playerLastName}"
+            android:textFontWeight="80"
+            android:textSize="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/firstNameLabel" />
 
@@ -30,15 +32,18 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:text="@{playerStats.playerFirstName}"
+            android:textFontWeight="80"
+            android:textSize="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:id="@+id/favoritePlayerImageButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck"
@@ -48,18 +53,18 @@
             android:id="@+id/generalInfoConstraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="1dp"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/statsConstraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lastNameLabel">
 
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="60dp">
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="20dp">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -68,6 +73,8 @@
 
                     <TextView
                         android:id="@+id/generalInfoLabel"
+                        android:textSize="20dp"
+                        android:textFontWeight="80"
                         android:layout_column="2"
                         android:text="General Info" />
                 </TableRow>
@@ -79,11 +86,13 @@
 
                     <TextView
                         android:id="@+id/playerPositionLabel"
+                        android:textSize="15dp"
                         android:layout_column="1"
                         android:text="Position: "></TextView>
 
                     <TextView
                         android:id="@+id/playerPositionInfo"
+                        android:textSize="15dp"
                         android:layout_column="2"
                         android:text="@{playerStats.playerPosition}"></TextView>
                 </TableRow>
@@ -95,11 +104,13 @@
 
                     <TextView
                         android:id="@+id/playerCurrentTeamLabel"
+                        android:textSize="15dp"
                         android:layout_column="1"
                         android:text="Current Team: "></TextView>
 
                     <TextView
                         android:id="@+id/currentTeamInfo"
+                        android:textSize="15dp"
                         android:layout_column="2"
                         android:text="@{playerStats.playerCurrentTeam}"></TextView>
                 </TableRow>
@@ -111,11 +122,13 @@
 
                     <TextView
                         android:id="@+id/playerHeightLabel"
+                        android:textSize="15dp"
                         android:layout_column="1"
                         android:text="Height: "></TextView>
 
                     <TextView
                         android:id="@+id/playerHeightInfo"
+                        android:textSize="15dp"
                         android:layout_column="2"
                         android:text="@{playerStats.playerHeight}"></TextView>
                 </TableRow>
@@ -127,11 +140,13 @@
 
                     <TextView
                         android:id="@+id/playerWeightLabel"
+                        android:textSize="15dp"
                         android:layout_column="1"
                         android:text="Weight: "></TextView>
 
                     <TextView
                         android:id="@+id/playerWeightInfo"
+                        android:textSize="15dp"
                         android:layout_column="2"
                         android:text="@{playerStats.playerWeight}"></TextView>
                 </TableRow>
@@ -142,14 +157,16 @@
                     android:layout_marginTop="10dp">
 
                     <TextView
-                        android:id="@+id/playerHighSchoolLabel"
+                        android:id="@+id/playerThrowsLabel"
+                        android:textSize="15dp"
                         android:layout_column="1"
-                        android:text="High School: "></TextView>
+                        android:text="Throws: "></TextView>
 
                     <TextView
-                        android:id="@+id/playerHighSchoolInfo"
+                        android:id="@+id/playerThrowsInfo"
+                        android:textSize="15dp"
                         android:layout_column="2"
-                        android:text="@{playerStats.playerHighSchool}"></TextView>
+                        android:text="@{playerStats.playerThrows}"></TextView>
                 </TableRow>
 
                 <TableRow
@@ -158,14 +175,35 @@
                     android:layout_marginTop="10dp">
 
                     <TextView
-                        android:id="@+id/playerCollegeLabel"
+                        android:id="@+id/playerBatsLabel"
+                        android:textSize="15dp"
                         android:layout_column="1"
-                        android:text="College: "></TextView>
+                        android:text="Bats: "></TextView>
 
                     <TextView
-                        android:id="@+id/playerCollegeInfo"
+                        android:id="@+id/playerBatsInfo"
+                        android:textSize="15dp"
                         android:layout_column="2"
-                        android:text="@{playerStats.playerCollege}"></TextView>
+                        android:text="@{playerStats.playerBats}"></TextView>
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/playerHometownLabel"
+                        android:textSize="15dp"
+                        android:layout_column="1"
+                        android:text="Hometown: "></TextView>
+
+                    <TextView
+                        android:id="@+id/playerHometownInfo"
+                        android:textSize="15dp"
+                        android:layout_column="2"
+                        android:text="@{playerStats.playerHometown}"></TextView>
                 </TableRow>
             </TableLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -174,12 +212,11 @@
             android:id="@+id/statsConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="329dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/generalInfoConstraint">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pitchingStatConstraintLayout"
@@ -188,83 +225,115 @@
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="60dp">
+
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="10dp">
+
                         <TextView
                             android:id="@+id/pitchingStatsLabel"
+                            android:textSize="20dp"
+                            android:textFontWeight="80"
                             android:layout_column="3"
-                            android:text="Pitching Stats"/>
+                            android:text="Pitching Stats" />
                     </TableRow>
+
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="10dp">
+
                         <TextView
                             android:id="@+id/winsStatLabel"
+                            android:textSize="15dp"
                             android:layout_column="1"
                             android:text="Wins: " />
+
                         <TextView
                             android:id="@+id/winsStatTextView"
+                            android:textSize="15dp"
                             android:layout_column="2"
-                            android:text="@{playerStats.playerPitchingStatsLiveData.w}"/>
+                            android:text="@{playerStats.playerPitchingStatsLiveData.w}" />
+
                         <TextView
                             android:id="@+id/losesStatLabel"
+                            android:textSize="15dp"
                             android:layout_column="4"
                             android:text="Loses: " />
+
                         <TextView
                             android:id="@+id/losesStatTextView"
+                            android:textSize="15dp"
                             android:layout_column="5"
-                            android:text="@{playerStats.playerPitchingStatsLiveData.l}"/>
+                            android:text="@{playerStats.playerPitchingStatsLiveData.l}" />
                     </TableRow>
+
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="10dp">
+
                         <TextView
                             android:id="@+id/strikeoutsStatLabel"
+                            android:textSize="15dp"
                             android:layout_column="1"
                             android:text="SO: " />
+
                         <TextView
                             android:id="@+id/strikoutStatTextView"
+                            android:textSize="15dp"
                             android:layout_column="2"
-                            android:text="@{playerStats.playerPitchingStatsLiveData.so}"/>
+                            android:text="@{playerStats.playerPitchingStatsLiveData.so}" />
+
                         <TextView
                             android:id="@+id/k9StatLabel"
+                            android:textSize="15dp"
                             android:layout_column="4"
                             android:text="K9: " />
+
                         <TextView
                             android:id="@+id/ks9StatTextView"
+                            android:textSize="15dp"
                             android:layout_column="5"
-                            android:text="@{playerStats.playerPitchingStatsLiveData.k9}"/>
+                            android:text="@{playerStats.playerPitchingStatsLiveData.k9}" />
                     </TableRow>
+
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="10dp">
+
                         <TextView
                             android:id="@+id/whipStatLabel"
+                            android:textSize="15dp"
                             android:layout_column="1"
                             android:text="WHIP: " />
+
                         <TextView
                             android:id="@+id/whipStatTextView"
+                            android:textSize="15dp"
                             android:layout_column="2"
-                            android:text="@{playerStats.playerPitchingStatsLiveData.whip}"/>
+                            android:text="@{playerStats.playerPitchingStatsLiveData.whip}" />
+
                         <TextView
                             android:id="@+id/eraStatLabel"
+                            android:textSize="15dp"
                             android:layout_column="4"
                             android:text="ERA: " />
+
                         <TextView
                             android:id="@+id/eraStatTextView"
+                            android:textSize="15dp"
                             android:layout_column="5"
-                            android:text="@{playerStats.playerPitchingStatsLiveData.era}"/>
+                            android:text="@{playerStats.playerPitchingStatsLiveData.era}" />
                     </TableRow>
                 </TableLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -276,7 +345,8 @@
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TableLayout
                     android:layout_width="match_parent"
@@ -290,6 +360,8 @@
 
                         <TextView
                             android:id="@+id/hittingStatsLabel"
+                            android:textSize="20dp"
+                            android:textFontWeight="80"
                             android:layout_column="3"
                             android:text="Hitting Stats" />
                     </TableRow>
@@ -301,21 +373,25 @@
 
                         <TextView
                             android:id="@+id/runSatLabel"
+                            android:textSize="15dp"
                             android:layout_column="1"
                             android:text="Runs: " />
 
                         <TextView
                             android:id="@+id/runStatTextView"
+                            android:textSize="15dp"
                             android:layout_column="2"
                             android:text="@{playerStats.playerHittingStatsLiveData.r}" />
 
                         <TextView
                             android:id="@+id/rbiStatLabel"
+                            android:textSize="15dp"
                             android:layout_column="4"
                             android:text="RBIs: " />
 
                         <TextView
                             android:id="@+id/rbiStatTextView"
+                            android:textSize="15dp"
                             android:layout_column="5"
                             android:text="@{playerStats.playerHittingStatsLiveData.rbi}" />
                     </TableRow>
@@ -327,21 +403,25 @@
 
                         <TextView
                             android:id="@+id/hitStatLabel"
+                            android:textSize="15dp"
                             android:layout_column="1"
                             android:text="Hits: " />
 
                         <TextView
                             android:id="@+id/hitStatTextView"
+                            android:textSize="15dp"
                             android:layout_column="2"
                             android:text="@{playerStats.playerHittingStatsLiveData.h}" />
 
                         <TextView
                             android:id="@+id/atBatStatLabel"
+                            android:textSize="15dp"
                             android:layout_column="4"
                             android:text="At Bat: " />
 
                         <TextView
                             android:id="@+id/atBatStatTextView"
+                            android:textSize="15dp"
                             android:layout_column="5"
                             android:text="@{playerStats.playerHittingStatsLiveData.ab}" />
                     </TableRow>
@@ -353,21 +433,25 @@
 
                         <TextView
                             android:id="@+id/homeRunStatLabel"
+                            android:textSize="15dp"
                             android:layout_column="1"
                             android:text="Home Runs: " />
 
                         <TextView
                             android:id="@+id/homeRunStatTextView"
+                            android:textSize="15dp"
                             android:layout_column="2"
                             android:text="@{playerStats.playerHittingStatsLiveData.hr}" />
 
                         <TextView
                             android:id="@+id/obpStatLabel"
+                            android:textSize="15dp"
                             android:layout_column="4"
                             android:text="OBP: " />
 
                         <TextView
                             android:id="@+id/obpStatTextView"
+                            android:textSize="15dp"
                             android:layout_column="5"
                             android:text="@{playerStats.playerHittingStatsLiveData.obp}" />
                     </TableRow>

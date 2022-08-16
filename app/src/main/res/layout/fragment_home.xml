@@ -32,4 +32,101 @@
         app:layout_constraintStart_toEndOf="@+id/searchPlayerText"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/favorite_players_constraint"
+        android:layout_width="404dp"
+        android:layout_height="660dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchPlayerText">
+
+        <TextView
+            android:id="@+id/favorite_players_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="23dp"
+            android:text="Favorite Players"
+            android:textFontWeight="80"
+            android:textSize="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/favorite_batters_constraint"
+            android:layout_width="403dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/favorite_players_header">
+
+            <TextView
+                android:id="@+id/favorite_batters_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="22dp"
+                android:text="Favorite Batters"
+                android:textFontWeight="80"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="@+id/favorite_batters_recycler"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favorite_batters_recycler"
+                android:layout_width="410dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/favorite_batters_header" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/favorite_pitchers_constraint"
+            android:layout_width="406dp"
+            android:layout_height="124dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/favorite_batters_constraint">
+
+            <TextView
+                android:id="@+id/favorite_pitchers_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="24dp"
+                android:text="Favorite Pitchers"
+                android:textFontWeight="80"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="@+id/favorite_pitchers_recycler"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favorite_pitchers_recycler"
+                android:layout_width="413dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/favorite_pitchers_header" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
