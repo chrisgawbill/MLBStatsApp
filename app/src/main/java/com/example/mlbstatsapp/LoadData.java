@@ -263,6 +263,10 @@ public class LoadData extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param player
+     */
     public void insertPlayer(Player player){
 
 

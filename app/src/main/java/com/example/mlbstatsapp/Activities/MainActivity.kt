@@ -5,19 +5,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 
-import com.example.mlbstatsapp.Fragments.SettingsFragment
-import com.example.mlbstatsapp.Fragments.TeamsListFragment
-import com.example.mlbstatsapp.HomeFragment
-import com.example.mlbstatsapp.HomeViewModel
 import com.example.mlbstatsapp.LoadData
 import com.example.mlbstatsapp.R
-import com.example.mlbstatsapp.database.Batter
-import com.example.mlbstatsapp.database.Pitcher
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
