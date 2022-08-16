@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Binder
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -24,6 +24,7 @@ import com.example.mlbstatsapp.database.Batter
 import com.example.mlbstatsapp.database.Pitcher
 import com.example.mlbstatsapp.database.Player
 import com.example.mlbstatsapp.databinding.FragmentIndividualPlayerBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,8 +67,8 @@ class IndividualPlayer : Fragment() {
         // Inflate the layout for this fragment
         var bind: com.example.mlbstatsapp.databinding.FragmentIndividualPlayerBinding = com.example.mlbstatsapp.databinding.FragmentIndividualPlayerBinding.inflate(inflater, container, false)
         var view = bind.root
-        hittingStatsLayout = view.findViewById(R.id.hittingStatConstraintLayout)
-        pitchingStatsLayout = view.findViewById(R.id.pitchingStatConstraintLayout)
+        hittingStatsLayout = view.findViewById(com.example.mlbstatsapp.R.id.hittingStatConstraintLayout)
+        pitchingStatsLayout = view.findViewById(com.example.mlbstatsapp.R.id.pitchingStatConstraintLayout)
 
         val safeArgs: IndividualPlayerArgs by navArgs()
         playerId = safeArgs.playerId

@@ -44,27 +44,22 @@
         tools:layout="@layout/fragment_individual_player" >
         <argument
             android:name="player_first_name"
-            android:defaultValue="Placeholder">
-        </argument>
+            android:defaultValue="Placeholder"></argument>
         <argument
             android:name="player_last_name"
-            android:defaultValue="Placeholder">
-        </argument>
+            android:defaultValue="Placeholder"></argument>
         <argument
             android:name="player_position"
             android:defaultValue="Placeholder"></argument>
         <argument
             android:name="player_id"
-            android:defaultValue="0">
-        </argument>
+            android:defaultValue="0"></argument>
         <argument
             android:name="player_height"
-            android:defaultValue="Placeholder">
-        </argument>
+            android:defaultValue="Placeholder"></argument>
         <argument
             android:name="player_weight"
-            android:defaultValue="Placeholder">
-        </argument>
+            android:defaultValue="Placeholder"></argument>
         <argument
             android:name="player_bats"
             android:defaultValue="Placeholder">

@@ -1,8 +1,9 @@
 package com.example.mlbstatsapp.Activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.R
 import android.os.Bundle
 import android.view.View
+
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -12,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.mlbstatsapp.LoadData
 import com.example.mlbstatsapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var bottomNav:BottomNavigationView
