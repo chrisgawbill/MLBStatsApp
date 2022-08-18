@@ -32,14 +32,9 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        
-        val populateDB= LoadData.getInstance(applicationContext)
-        populateDB.insertTeams()
-        populateDB.updateAllTeams()
 
         setupBottomNav()
         setupActionNav()
-        setAlarmManager()
     }
     fun setupBottomNav(){
         bottomNav = findViewById(R.id.bottomNavigationView)
@@ -57,22 +52,5 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
-    }
-    fun setAlarmManager(){
-        val calendar: Calendar = Calendar.getInstance().apply {
-            timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, 5)
-        }
-
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            pendingIntent
-        )
-        Log.d(MainActivity::class.java.simpleName, "Alarm Set")
     }
 }
