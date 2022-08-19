@@ -6,45 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-
-    <EditText
-        android:id="@+id/searchPlayerText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginEnd="26dp"
-        android:ems="10"
-        android:hint="@string/search_for_player"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/searchPlayerButton"
-        app:layout_constraintEnd_toStartOf="@+id/searchPlayerButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/searchPlayerButton" />
-
-    <Button
-        android:id="@+id/searchPlayerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="53dp"
-        android:backgroundTint="@color/appPrimary"
-        android:text="@string/search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/searchPlayerText"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/favorite_players_constraint"
         android:layout_width="404dp"
         android:layout_height="660dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchPlayerText">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/favorite_players_header"
@@ -53,8 +25,8 @@
             android:layout_marginStart="112dp"
             android:layout_marginTop="16dp"
             android:text="Favorite Players"
-            android:textFontWeight="100"
             android:textColor="@color/black"
+            android:textFontWeight="100"
             android:textSize="25dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -75,8 +47,8 @@
                 android:layout_marginStart="132dp"
                 android:layout_marginTop="20dp"
                 android:text="Favorite Batters"
-                android:textFontWeight="95"
                 android:textColor="@color/black"
+                android:textFontWeight="95"
                 android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="@+id/favorite_batters_recycler"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -113,8 +85,8 @@
                 android:layout_marginStart="128dp"
                 android:layout_marginTop="24dp"
                 android:text="Favorite Pitchers"
-                android:textFontWeight="95"
                 android:textColor="@color/black"
+                android:textFontWeight="95"
                 android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="@+id/favorite_pitchers_recycler"
                 app:layout_constraintTop_toTopOf="parent" />

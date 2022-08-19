@@ -98,14 +98,17 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         sharedViewModel.playerSearchTerm.value = p0
 
         var currentFragment:String = navController.currentDestination!!.label.toString()
+        val id = navController.currentDestination?.id
         Log.d(MainActivity::class.java.simpleName, navController.currentDestination!!.label.toString())
         var view:View = findViewById(R.id.content)
         if(currentFragment.equals("Home")){
             navController.navigate(com.example.mlbstatsapp.R.id.action_homeFragment_to_playerSearchResultsFragment)
         }else if(currentFragment.equals("Player Search Results")){
-            navController.navigate(com.example.mlbstatsapp.R.id.action_playerSearchResultsFragment_self)
+            navController.popBackStack(id!!,true)
+            navController.navigate(id)
         }else if(currentFragment.equals("Player Page")){
             navController.navigate(com.example.mlbstatsapp.R.id.action_individualPlayer_to_playerSearchResultsFragment)
+            navController.popBackStack(id!!,true)
         }
 
         return true

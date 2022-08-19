@@ -26,9 +26,6 @@
         <action
             android:id="@+id/action_playerSearchResultsFragment_to_individualPlayer"
             app:destination="@id/individualPlayer" />
-        <action
-            android:id="@+id/action_playerSearchResultsFragment_self"
-            app:destination="@id/playerSearchResultsFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

@@ -47,10 +47,8 @@ public class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    lateinit var playerSearchBtn:Button
-    lateinit var playerSearchText:EditText
+
     lateinit var sharedViewModel:HomePlayerSearchSharedViewModel
-    lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,16 +77,6 @@ public class HomeFragment : Fragment() {
         favoriteBatterRecycler = view.findViewById(R.id.favorite_batters_recycler)
         favoritePitcherRecycler = view.findViewById(R.id.favorite_pitchers_recycler)
 
-        playerSearchBtn = view.findViewById(R.id.searchPlayerButton)
-        playerSearchText = view.findViewById(R.id.searchPlayerText)
-        playerSearchBtn.setOnClickListener(View.OnClickListener {
-            var playerSearchClickParam = playerSearchText.text.toString()
-            if(!TextUtils.isEmpty(playerSearchClickParam)){
-                playerSearchClick(playerSearchClickParam, view)
-            }else{
-                playerSearchText.hint = "Please enter a name"
-            }
-        })
         homeViewModel = HomeViewModel(activity)
         getFavorites(view)
 
@@ -113,19 +101,6 @@ public class HomeFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
-
-    /**
-     * We set the inputted search term in the HomePlayerSearchSharedViewModel
-     * We then navigate to playerSearchResultsFragment
-     */
-    fun playerSearchClick(playerSearchParam:String, view:View){
-        sharedViewModel = activity?.run{
-            ViewModelProviders.of(this).get(HomePlayerSearchSharedViewModel::class.java)
-        }?: throw Exception("Invalid Activity")
-        sharedViewModel.playerSearchTerm.value = playerSearchParam
-
-        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_playerSearchResultsFragment)
     }
 
     /**
