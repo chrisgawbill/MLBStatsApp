@@ -3,14 +3,14 @@ package com.example.mlbstatsapp
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.MenuItemCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -50,6 +50,7 @@ public class HomeFragment : Fragment() {
     lateinit var playerSearchBtn:Button
     lateinit var playerSearchText:EditText
     lateinit var sharedViewModel:HomePlayerSearchSharedViewModel
+    lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
