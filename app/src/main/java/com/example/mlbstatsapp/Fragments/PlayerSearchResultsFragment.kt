@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mlbstatsapp.*
@@ -91,7 +92,7 @@ class PlayerSearchResultsFragment : Fragment() {
         sharedViewModel.playerSearchTerm.observe(viewLifecycleOwner, Observer {
              searchTerm = sharedViewModel.playerSearchTerm.value.toString()
             playerSearchView.getPlayerSearchResultsDataObserver().observe(viewLifecycleOwner,Observer<PlayerList>{
-                if(it != null){
+                if(it.totalSize.toInt() > 0){
                     Log.d(PlayerSearchResultsFragment::class.java.simpleName, it.row.toString())
                     var playerArrayList:ArrayList<PlayerApiModel> = ArrayList()
                     if(it.totalSize.toInt() > 1){
@@ -104,7 +105,11 @@ class PlayerSearchResultsFragment : Fragment() {
                     }else{
                         var json = Gson().toJson(it.row)
                         var playerObject = Gson().fromJson(json, PlayerApiModel::class.java)
-                        playerArrayList.add(playerObject)
+                        if(playerObject != null){
+                            playerArrayList.add(playerObject)
+                        }else{
+                            Toast.makeText(view.context, "Could not find a player, please enter another query", Toast.LENGTH_LONG).show()
+                        }
                     }
                     Log.d(PlayerSearchResultsFragment::class.java.simpleName, playerArrayList.toString())
                     playerSearchView.setAdapterData(playerArrayList)
