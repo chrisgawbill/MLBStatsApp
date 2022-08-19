@@ -79,5 +79,8 @@
         <action
             android:id="@+id/action_individualPlayer_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_individualPlayer_to_playerSearchResultsFragment"
+            app:destination="@id/playerSearchResultsFragment" />
     </fragment>
 </navigation>

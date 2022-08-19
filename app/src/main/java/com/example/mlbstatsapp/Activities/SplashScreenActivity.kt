@@ -8,41 +8,38 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.Window
 import android.view.WindowManager
 import com.example.mlbstatsapp.LoadData
 import java.util.*
 
 class SplashScreenActivity : AppCompatActivity() {
+    /**
+     * Sets the splash screen to load the data and then traverse to the Main Activity
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
         setContentView(com.example.mlbstatsapp.R.layout.activity_splash_screen)
 
         Handler().postDelayed({
-            // on below line we are
-            // creating a new intent
             val i = Intent(
                 this@SplashScreenActivity,
                 MainActivity::class.java
             )
-            // on below line we are
-            // starting a new activity.
             val populateDB= LoadData.getInstance(applicationContext)
             populateDB.insertTeams()
             populateDB.updateAllTeams()
 
             setAlarmManager()
-
             startActivity(i)
 
-            // on the below line we are finishing
-            // our current activity.
             finish()
         }, 2000)
     }
+
+    /**
+     * Sets the alarm to check for stat changes for 5am every day
+     */
     fun setAlarmManager(){
         val calendar: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
@@ -58,6 +55,6 @@ class SplashScreenActivity : AppCompatActivity() {
             AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
-        Log.d(MainActivity::class.java.simpleName, "Alarm Set")
+        Log.d(SplashScreenActivity::class.java.simpleName, "Alarm Set")
     }
 }
