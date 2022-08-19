@@ -25,6 +25,10 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     lateinit var bottomNav:BottomNavigationView
     private lateinit var navController: NavController
+
+    /**
+     * We set the navController and then call methods to setup bottom navigation and the actionNav
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         setupBottomNav()
         setupActionNav()
     }
+
+    /**
+     * Setups the bottom nav
+     * Configures it so the bottom nav is hidden on playerSearch and playerIndividual page
+     */
     fun setupBottomNav(){
         bottomNav = findViewById(R.id.bottomNavigationView)
         bottomNav.setupWithNavController(navController)
@@ -47,6 +56,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    /**
+     * Setups the actionNav so that there is a back button on the appropriate pages
+     */
     fun setupActionNav(){
         setupActionBarWithNavController(navController)
     }

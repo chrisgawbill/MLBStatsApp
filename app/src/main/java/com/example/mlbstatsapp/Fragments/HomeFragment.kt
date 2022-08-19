@@ -59,6 +59,12 @@ public class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     * We set the constraintLayouts, recyclerViews, searchEditText, searchButton
+     * We set an onClickListener to the searchButton
+     * We set out homeViewModel
+     * We call a method to get favorite batters and pitchers
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -107,6 +113,11 @@ public class HomeFragment : Fragment() {
                 }
             }
     }
+
+    /**
+     * We set the inputted search term in the HomePlayerSearchSharedViewModel
+     * We then navigate to playerSearchResultsFragment
+     */
     fun playerSearchClick(playerSearchParam:String, view:View){
         sharedViewModel = activity?.run{
             ViewModelProviders.of(this).get(HomePlayerSearchSharedViewModel::class.java)
@@ -115,6 +126,14 @@ public class HomeFragment : Fragment() {
 
         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_playerSearchResultsFragment)
     }
+
+    /**
+     * We get the favorite batters and pitchers from DB and put them in seperate lists
+     * If both lists are empty we make favoritePlayersConstraintLayout not visible
+     * If batter list is empty we make favoriteBattersConstraintLayout not visible
+     * If pitcher list is empty we make favoritePitchersConstraintLayout not visible
+     * For whichever lists are not empty we set the respective recycler views layoutManger and adapter
+     */
     fun getFavorites(view:View){
         val batterList:List<Batter> = homeViewModel.getAllBatters()
         val pitcherList:List<Pitcher> = homeViewModel.getAllPitchers()
