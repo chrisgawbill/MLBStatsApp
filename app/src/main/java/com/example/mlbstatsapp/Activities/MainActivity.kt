@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     fun setupBottomNav(){
         bottomNav = findViewById(com.example.mlbstatsapp.R.id.bottomNavigationView)
         bottomNav.setupWithNavController(navController)
-        /*
+
         navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
             if (nd.id == com.example.mlbstatsapp.R.id.homeFragment|| nd.id == com.example.mlbstatsapp.R.id.teamsListFragment || nd.id == com.example.mlbstatsapp.R.id.settingsFragment) {
                 bottomNav.visibility = View.VISIBLE
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 bottomNav.visibility = View.GONE
             }
         }
-        */
+
     }
 
     /**
