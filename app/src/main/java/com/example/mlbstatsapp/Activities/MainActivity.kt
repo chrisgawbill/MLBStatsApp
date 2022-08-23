@@ -73,6 +73,11 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+    /**
+     * We inflate the menu in the appBar so that it shows the search icon
+     * We also set a textListener onto the searchView that will appear when the search icon is clicked on
+     */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(com.example.mlbstatsapp.R.menu.action_bar_search, menu )
         var searchItem: android.view.MenuItem =
@@ -81,6 +86,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         searchView.setOnQueryTextListener(this)
         return true
     }
+
+    /**
+     * When the search icon is clicked on we set the searchView
+     */
     override fun onOptionsItemSelected(item: MenuItem1):Boolean {
         when(item.itemId){
             com.example.mlbstatsapp.R.id.app_bar_menu_search->{
@@ -91,6 +100,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         return false;
     }
 
+    /**
+     *This method fires when the text is submitted in the searchView
+     * It puts the text in a sharedViewModel and then navigates to PlayerSearchResultsPage from the current page
+     */
     override fun onQueryTextSubmit(p0: String?): Boolean {
         sharedViewModel = this?.run{
             ViewModelProviders.of(this).get(HomePlayerSearchSharedViewModel::class.java)
@@ -114,6 +127,9 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         return true
     }
 
+    /**
+     * Do nothing when the text changes in the searchView
+     */
     override fun onQueryTextChange(p0: String?): Boolean {
         return false
     }

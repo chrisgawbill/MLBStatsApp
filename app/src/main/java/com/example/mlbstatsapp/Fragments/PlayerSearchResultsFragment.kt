@@ -84,6 +84,14 @@ class PlayerSearchResultsFragment : Fragment() {
                 }
             }
     }
+
+    /**
+     * In this method we make the api call to get the search results
+     * We get the search value from the HomePlayerSearchSharedViewModel
+     * We then create an PlayerSearchViewModel and pass that search value into getPlayerSearchList
+     * We also observe playerSearchResultsData live mutable data list
+     * When that data list has data put in we pass that data into the recyclerView via the view model
+     */
     fun makeApiCall(view:View): PlayerSearchViewModel {
         var playerSearchView: PlayerSearchViewModel = PlayerSearchViewModel()
         sharedViewModel = activity?.run {

@@ -120,6 +120,11 @@ class IndividualPlayer : Fragment() {
                 }
             }
     }
+
+    /**
+     * In this method based on player position we determine which method to call, which determines which api call we will make from the
+     * IndividualPlayerViewModel
+     */
     fun makeStatsApiCall(playerIdParam:Int, playerPositionParam:String, bindParam: com.example.mlbstatsapp.databinding.FragmentIndividualPlayerBinding, viewParam:View, safeArgsParam:IndividualPlayerArgs){
         if(playerPositionParam == "P"){
             makePitchingStatsCall(playerIdParam, bindParam, viewParam)
@@ -127,6 +132,11 @@ class IndividualPlayer : Fragment() {
             makeHittingStatsCall(playerIdParam, bindParam, viewParam)
         }
     }
+
+    /**
+     * We create an IndividualPlayerViewModel and then call the method to make the api call to get a
+     * hitting players stats
+     */
     fun makeHittingStatsCall(playerIdParam:Int, bindParam: FragmentIndividualPlayerBinding, viewParam:View){
         individualPlayerViewModel.getPlayerHittingStatsData().observe(viewLifecycleOwner, Observer<PlayerHittingStats>{
                 if(it != null){
@@ -141,6 +151,10 @@ class IndividualPlayer : Fragment() {
             })
             individualPlayerViewModel.getPlayerHittingStats(playerIdParam)
         }
+    /**
+     * We create an IndividualPlayerViewModel and then call the method to make the api call to get a
+     * pitching players stats
+     */
     fun makePitchingStatsCall(playerIdParam:Int, bindParam:FragmentIndividualPlayerBinding, viewParam:View){
         individualPlayerViewModel.getPlayerPitchingStatsData().observe(viewLifecycleOwner, Observer<PlayerPitchingStat>{
             if(it != null){
@@ -156,6 +170,11 @@ class IndividualPlayer : Fragment() {
         })
         individualPlayerViewModel.getPlayerPitchingStats(playerIdParam)
     }
+
+    /**
+     * In this method we set the icon of the imageButton
+     * First we see if the current player is in the db as a favorited player, if they are then we set the icon as a favorited_player_icon
+     */
     fun setFavoriteImageButton(playerIdParam:Int, playerPositionParam: String, viewParam:View){
         var pitcherFavorite:Pitcher? = null
         var batterFavorite:Batter? = null
@@ -177,6 +196,11 @@ class IndividualPlayer : Fragment() {
             favoriteIcon.setTag(R.id.favoritePlayerImageButton, "Favorite")
         }
     }
+
+    /**
+     * When the favorite image button is clicked then we change the icon and either call a method
+     * to put the player in the db or remove them from the db
+     */
     fun favoriteIconButtonClick(){
         var tag = favoriteIcon.getTag(R.id.favoritePlayerImageButton)
         if(tag.equals("Favorite")){
@@ -189,9 +213,17 @@ class IndividualPlayer : Fragment() {
             insertFavoriteIntoDB()
         }
     }
+
+    /**
+     * We call a view model method to insert the current player in the db
+     */
     fun insertFavoriteIntoDB(){
        individualPlayerViewModel.insertFavoriteIntoDb(activity, playerId.toString());
     }
+
+    /**
+     * We call a view model method to delete the current player from the db
+     */
     fun deleteFavoriteFromDB(){
         individualPlayerViewModel.deleteFavoritePlayerFromDb(activity, playerId.toString());
     }
