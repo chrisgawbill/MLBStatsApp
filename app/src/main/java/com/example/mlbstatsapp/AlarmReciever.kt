@@ -13,6 +13,13 @@ import com.example.mlbstatsapp.ApiModels.PlayerPitchingStat
 import com.example.mlbstatsapp.database.Batter
 import com.example.mlbstatsapp.database.Pitcher
 
+/**
+ * This is the broadcastReciever class for the alarmMangager set in SplashScreenActiity
+ * It gets the list of favorite batter/pitchers
+ * It calls mainViewModel stats to get the stats for each player
+ * It then compares the returned stats and the ones in db, if they differ a notification is
+ * created and sent to the user
+ */
 class AlarmReciever: BroadcastReceiver() {
     override fun onReceive(
         context: Context,

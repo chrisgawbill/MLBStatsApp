@@ -8,6 +8,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
 
+/**
+ * The querys for the api calls to MLB API
+ */
 interface MlbApi {
 
     @GET("named.search_player_all.bam")

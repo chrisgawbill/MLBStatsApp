@@ -27,6 +27,10 @@ class IndividualPlayerViewModel{
     var playerBats:MutableLiveData<String> = MutableLiveData()
     var playerHometown:MutableLiveData<String> = MutableLiveData()
 
+    /**
+     * Sets the respective mutable live data in this class to values
+     * Used for other methods in this class
+     */
     fun setGeneralPlayerInfo(playerPositionParam:String, playerFirstNameParam:String, playerLastNameParam:String,
     playerHeightParam:String, playerWeightParam:String, playerCurrentTeamParam:String, playerThrowsParam:String,
     playerBatsParam:String, playerHometownParam:String){
@@ -40,12 +44,24 @@ class IndividualPlayerViewModel{
         playerBats.value = playerBatsParam
         playerHometown.value = playerHometownParam
     }
+
+    /**
+     * Returns the playerHittingStatsLiveData Mutable Live Data
+     */
     fun getPlayerHittingStatsData():MutableLiveData<PlayerHittingStats>{
         return playerHittingStatsLiveData
     }
+
+    /**
+     * Returns the playerPitchingStatsLiveData Mutable Live Data
+     */
     fun getPlayerPitchingStatsData():MutableLiveData<PlayerPitchingStat>{
         return playerPitchingStatsLiveData
     }
+
+    /**
+     * Calls retrofit helper class to get the plauer hitting stats for the respective plauerID put in
+     */
     fun getPlayerHittingStats(playerID:Int){
         val mlbApi = RetrofitHelper.getInstance().create(MlbApi::class.java)
         Log.d(HomeViewModel::class.java.simpleName, playerID.toString())
@@ -78,6 +94,10 @@ class IndividualPlayerViewModel{
             }
         })
     }
+
+    /**
+     * Calls the retrofit helper class to get the pitching stats for the respective playerID
+     */
     fun getPlayerPitchingStats(playerID:Int){
         val mlbApi = RetrofitHelper.getInstance().create(MlbApi::class.java)
         Log.d(HomeViewModel::class.java.simpleName, playerID.toString())
@@ -117,6 +137,10 @@ class IndividualPlayerViewModel{
         })
 
     }
+
+    /**
+     * It checks the set playerPosition and uses the data set in setGeneralInfo to input the player into the db
+     */
     fun insertFavoriteIntoDb(activity:FragmentActivity?, playerId:String){
         val db = LoadData.getInstance(activity?.applicationContext ?: activity?.applicationContext)
         if(playerPosition.value == "P"){
@@ -137,6 +161,10 @@ class IndividualPlayerViewModel{
             db.insertBatter(batter)
         }
     }
+
+    /**
+     * Deletes the player from the db
+     */
     fun deleteFavoritePlayerFromDb(activity: FragmentActivity?, playerId:String){
         val db = LoadData.getInstance(activity?.applicationContext ?: activity?.applicationContext)
         if(playerPosition.value == "P"){

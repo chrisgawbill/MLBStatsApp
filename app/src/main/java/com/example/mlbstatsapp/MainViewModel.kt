@@ -16,18 +16,37 @@ class MainViewModel(context: Context):ViewModel() {
 
     val db = LoadData.getInstance(context)
 
+    /**
+     * Returns all the batters in db
+     */
     fun getAllBatters():List<Batter>{
         return db.getAllBatters()
     }
+
+    /**
+     * Returns all the pitchers in db
+     */
     fun getAllPitchers():List<Pitcher>{
         return db.getAllPitchers()
     }
+
+    /**
+     * Returns the playerHittingStatsLiveData Mutable Live Data
+     */
     fun getPlayerHittingStatsData():MutableLiveData<PlayerHittingStats>{
         return playerHittingStatsLiveData
     }
+
+    /**
+     * Returns teh playerPitchingStatsLiveData Mutable Live Data
+     */
     fun getPlayerPitchingStatsData():MutableLiveData<PlayerPitchingStat>{
         return playerPitchingStatsLiveData
     }
+
+    /**
+     * Calls the retrofit helper class and gets the hitting stats for the respective playerID
+     */
     fun getPlayerHittingStats(playerID:Int){
         val mlbApi = RetrofitHelper.getInstance().create(MlbApi::class.java)
         Log.d(HomeViewModel::class.java.simpleName, playerID.toString())
@@ -60,6 +79,10 @@ class MainViewModel(context: Context):ViewModel() {
             }
         })
     }
+
+    /**
+     * Calls the Retrofit helper class to get the pitching stats for the respective playerID
+     */
     fun getPlayerPitchingStats(playerID:Int) {
         val mlbApi = RetrofitHelper.getInstance().create(MlbApi::class.java)
         Log.d(HomeViewModel::class.java.simpleName, playerID.toString())

@@ -13,16 +13,31 @@ class PlayerSearchViewModel(): ViewModel() {
     var playerSearchResults:MutableLiveData<PlayerList> = MutableLiveData()
     var playerSearchResultsRecyclerViewAdapter = PlayerSearchResultsAdapter()
 
+    /**
+     * Returns the playerSearchResultsRecyclerViewAdapter set in setAdapterData()
+     */
     fun getAdapter(): PlayerSearchResultsAdapter {
         return playerSearchResultsRecyclerViewAdapter
     }
+
+    /**
+     * Sets the value for playerSearchResultsRecyclerViewAdapter
+     */
     fun setAdapterData(data:ArrayList<PlayerApiModel>){
         playerSearchResultsRecyclerViewAdapter.setDataList(data)
         playerSearchResultsRecyclerViewAdapter.notifyDataSetChanged()
     }
+
+    /**
+     * Returns playerSearchResutls Mutable Live Data
+     */
     fun getPlayerSearchResultsDataObserver():MutableLiveData<PlayerList>{
         return playerSearchResults
     }
+
+    /**
+     * Calls the retrofit helper class to get the returned response to the playerSearch string query
+     */
     fun getPlayerSearchList(playerSearch:String){
         val mlbApi = RetrofitHelper.getInstance().create(MlbApi::class.java)
         Log.d(PlayerSearchViewModel::class.java.simpleName, playerSearch)
