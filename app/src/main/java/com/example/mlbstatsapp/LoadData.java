@@ -279,6 +279,7 @@ public class LoadData extends AppCompatActivity {
     }
     public void insertBatter(Batter batter){appDb.getBatterDao().insertBatter(batter);}
     public void deleteBatter(String id){appDb.getBatterDao().deleteBatter(id);}
+    public void updateBatterStats(String id, String hr, String rbi, String ba){appDb.getBatterDao().updateHittingStats(id,hr,rbi,ba);}
     public Pitcher getPitcher(String id){
         return appDb.getPitcherDao().findPitcher(id);
     }
@@ -287,6 +288,7 @@ public class LoadData extends AppCompatActivity {
     }
     public void insertPitcher(Pitcher pitcher){appDb.getPitcherDao().insertPitcher(pitcher);}
     public void deletePitcher(String id){appDb.getPitcherDao().deletePitcher(id);}
+    public void updatePitchingStats(String id, String era, String wins, String losses){appDb.getPitcherDao().updatePitchingStats(id,era,wins,losses);}
 
 
 }

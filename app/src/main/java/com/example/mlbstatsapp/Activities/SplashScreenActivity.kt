@@ -10,6 +10,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
+import com.example.mlbstatsapp.AlarmReciever
 import com.example.mlbstatsapp.LoadData
 import java.util.*
 
@@ -44,7 +45,7 @@ class SplashScreenActivity : AppCompatActivity() {
         }
 
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, AlarmReciever::class.java)
         val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,

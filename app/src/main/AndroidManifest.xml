@@ -32,7 +32,8 @@
             android:windowSoftInputMode="adjustPan|adjustResize">
         </activity>
 
-        <receiver android:name="com.example.mlbstatsapp.AlarmReciever" />
+        <receiver android:name="com.example.mlbstatsapp.AlarmReciever">
+        </receiver>
     </application>
 
 </manifest>

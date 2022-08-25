@@ -133,4 +133,5 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextChange(p0: String?): Boolean {
         return false
     }
+
 }
