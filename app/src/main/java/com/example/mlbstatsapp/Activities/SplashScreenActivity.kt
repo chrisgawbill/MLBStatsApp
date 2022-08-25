@@ -19,9 +19,7 @@ class SplashScreenActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.example.mlbstatsapp.R.layout.activity_splash_screen)
 
-        Handler().postDelayed({
             val i = Intent(
                 this@SplashScreenActivity,
                 MainActivity::class.java
@@ -34,7 +32,6 @@ class SplashScreenActivity : AppCompatActivity() {
             startActivity(i)
 
             finish()
-        }, 2000)
     }
 
     /**

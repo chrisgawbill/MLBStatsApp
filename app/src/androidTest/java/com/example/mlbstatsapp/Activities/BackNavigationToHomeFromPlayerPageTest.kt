@@ -54,7 +54,7 @@ class BackNavigationToHomeFromPlayerPageTest {
 
         val searchAutoComplete = onView(
             allOf(
-                withClassName(`is`("android.widget.SearchView${SearchView.SearchAutoComplete}")),
+                withClassName(`is`("android.widget.SearchView${SearchAutoComplete}")),
                 childAtPosition(
                     allOf(
                         withClassName(`is`("android.widget.LinearLayout")),
@@ -72,7 +72,7 @@ class BackNavigationToHomeFromPlayerPageTest {
 
         val searchAutoComplete2 = onView(
             allOf(
-                withClassName(`is`("android.widget.SearchView${SearchView.SearchAutoComplete}")),
+                withClassName(`is`("android.widget.SearchView${SearchAutoComplete}")),
                 withText("Nola"),
                 childAtPosition(
                     allOf(
