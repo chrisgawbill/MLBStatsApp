@@ -76,7 +76,7 @@ class AlarmReciever: BroadcastReceiver() {
 
                         if(recievedRbi > batterRbi || recievedHr > batterHr || recievedBa > batterBa){
                             Log.d(AlarmReciever::class.java.simpleName, "${batterName} stat has changed")
-                            createPitcherNotification(batterName)
+                            createPlayerNotification(batterName)
                             mainViewModel.updateBatterStats(batterId.toString(), recievedHr.toString(), recievedRbi.toString(), recievedBa.toString())
                         }else{
                             Log.d(AlarmReciever::class.java.simpleName, "${batterName} stat has not changed")
@@ -106,7 +106,7 @@ class AlarmReciever: BroadcastReceiver() {
                         var recievedLosses = it.l.toInt()
                         if(recievedEra > pitcherEra || recievedWins > pitcherWins || recievedLosses > pitcherLosses){
                             Log.d(AlarmReciever::class.java.simpleName, "${pitcherName} stat has changed")
-                            createPitcherNotification(pitcherName)
+                            createPlayerNotification(pitcherName)
                             mainViewModel.updatePitchingStats(pitcherId.toString(),recievedEra.toString(),recievedWins.toString(),recievedLosses.toString())
                         }else{
                             Log.d(AlarmReciever::class.java.simpleName, "${pitcherName} stat has not changed")
@@ -119,7 +119,7 @@ class AlarmReciever: BroadcastReceiver() {
             }
         }
     }
-    fun createPitcherNotification(playerName:String){
+    fun createPlayerNotification(playerName:String){
         var notifyBuilder:NotificationCompat.Builder = getNotificationBuilder(playerName)
         notificationManager.notify(NOTIFICATION_ID, notifyBuilder.build())
     }

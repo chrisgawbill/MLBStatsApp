@@ -42,6 +42,8 @@ class SplashScreenActivity : AppCompatActivity() {
         val calendar: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, 5)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
         }
 
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager

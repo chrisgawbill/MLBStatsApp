@@ -83,6 +83,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         var searchItem: android.view.MenuItem =
             menu!!.findItem(com.example.mlbstatsapp.R.id.app_bar_menu_search);
         searchView =  MenuItemCompat.getActionView(searchItem) as SearchView
+        searchView.queryHint = "Search for Player"
         searchView.setOnQueryTextListener(this)
         return true
     }
