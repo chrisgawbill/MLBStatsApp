@@ -85,14 +85,18 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
      * We inflate the menu in the appBar so that it shows the search icon
      * We also set a textListener onto the searchView that will appear when the search icon is clicked on
      */
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(com.example.mlbstatsapp.R.menu.action_bar_search, menu )
         var searchItem: android.view.MenuItem =
             menu!!.findItem(com.example.mlbstatsapp.R.id.app_bar_menu_search);
         searchView =  MenuItemCompat.getActionView(searchItem) as SearchView
+        searchView.queryHint = "Search for Player"
         searchView.setOnQueryTextListener(this)
         return true
     }
+
+
 
     /**
      * When the search icon is clicked on we set the searchView

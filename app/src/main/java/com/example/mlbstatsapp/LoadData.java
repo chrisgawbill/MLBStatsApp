@@ -336,6 +336,9 @@ public class LoadData extends AppCompatActivity {
 
     }
 
+    public void updateBatterStats(String id, String hr, String rbi, String ba){appDb.getBatterDao().updateHittingStats(id,hr,rbi,ba);}
+    public void updatePitchingStats(String id, String era, String wins, String losses){appDb.getPitcherDao().updatePitchingStats(id,era,wins,losses);}
+
 
 
 

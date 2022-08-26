@@ -20,4 +20,7 @@ public interface BatterDao {
 
     @Query("DELETE FROM Batter WHERE `player-id`= :id")
     void deleteBatter(String id);
+
+    @Query("UPDATE Batter SET 'hr'= :hr, 'rbi'= :rbi, 'ba'= :ba WHERE 'player-id'= :id")
+    void updateHittingStats(String id, String hr, String rbi, String ba);
 }
