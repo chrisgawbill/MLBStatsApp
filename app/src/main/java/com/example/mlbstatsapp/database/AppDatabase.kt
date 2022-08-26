@@ -5,12 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities=[Team::class, Batter::class, Pitcher::class], version =1)
+@Database(entities=[Team::class, Batter::class, Pitcher::class, User::class, UserWithTeams::class], version =1)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun getTeamDao(): TeamDao
     abstract fun getBatterDao():BatterDao
     abstract fun getPitcherDao():PitcherDao
+    abstract fun getUserWithTeamsDao(): UserWithTeamsDao
+    abstract fun getUserDao(): UserDao
 
 
 

@@ -1,6 +1,10 @@
 package com.example.mlbstatsapp.Activities
 
 import android.R
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -17,11 +21,14 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.mlbstatsapp.AlarmReciever
 import com.example.mlbstatsapp.Fragments.IndividualPlayer
 import com.example.mlbstatsapp.Fragments.PlayerSearchResultsFragment
 import com.example.mlbstatsapp.HomeFragment
 import com.example.mlbstatsapp.HomePlayerSearchSharedViewModel
+import com.example.mlbstatsapp.LoadData
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 import android.view.MenuItem as MenuItem1
 
 
@@ -37,6 +44,12 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.mlbstatsapp.R.layout.activity_main)
+
+        val populateDB= LoadData.getInstance(applicationContext)
+        populateDB.insertTeams()
+        populateDB.updateAllTeams()
+
+        setAlarmManager()
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(com.example.mlbstatsapp.R.id.nav_host_fragment) as NavHostFragment
@@ -83,6 +96,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         var searchItem: android.view.MenuItem =
             menu!!.findItem(com.example.mlbstatsapp.R.id.app_bar_menu_search);
         searchView =  MenuItemCompat.getActionView(searchItem) as SearchView
+        searchView.queryHint = "Search for Player"
         searchView.setOnQueryTextListener(this)
         return true
     }
@@ -132,5 +146,27 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
      */
     override fun onQueryTextChange(p0: String?): Boolean {
         return false
+    }
+    /**
+     * Sets the alarm to check for stat changes for 5am every day
+     */
+    fun setAlarmManager(){
+        val calendar: Calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, 5)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, AlarmReciever::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
+        Log.d(SplashScreenActivity::class.java.simpleName, "Alarm Set")
     }
 }

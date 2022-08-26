@@ -35,8 +35,54 @@
     <fragment
         android:id="@+id/teamsListFragment"
         android:name="com.example.mlbstatsapp.Fragments.TeamsListFragment"
-        android:label="Teams List"
-        tools:layout="@layout/fragment_teams_list" />
+        android:label="MLB Teams"
+        tools:layout="@layout/fragment_teams_list" >
+        <action
+            android:id="@+id/action_teamsListFragment_to_individualTeam"
+            app:destination="@id/individualTeamFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/individualTeamFragment"
+        android:name="com.example.mlbstatsapp.Fragments.IndividualTeamFragment"
+        android:label="Team Statistics"
+        tools:layout="@layout/fragment_individual_team">
+        <argument
+            android:name="location"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="name"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="league"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="division"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="wins"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="losses"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="streak"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="games_back"
+            android:defaultValue="Placeholder">
+        </argument>
+        <argument
+            android:name="last_ten"
+            android:defaultValue="Placeholder">
+        </argument>
+    </fragment>
     <fragment
         android:id="@+id/individualPlayer"
         android:name="com.example.mlbstatsapp.Fragments.IndividualPlayer"

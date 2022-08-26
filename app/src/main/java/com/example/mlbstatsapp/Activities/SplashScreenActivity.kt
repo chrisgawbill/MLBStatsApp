@@ -10,6 +10,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
+import com.example.mlbstatsapp.AlarmReciever
 import com.example.mlbstatsapp.LoadData
 import java.util.*
 
@@ -26,11 +27,6 @@ class SplashScreenActivity : AppCompatActivity() {
                 this@SplashScreenActivity,
                 MainActivity::class.java
             )
-            val populateDB= LoadData.getInstance(applicationContext)
-            populateDB.insertTeams()
-            populateDB.updateAllTeams()
-
-            setAlarmManager()
             startActivity(i)
 
             finish()
@@ -44,10 +40,12 @@ class SplashScreenActivity : AppCompatActivity() {
         val calendar: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, 5)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
         }
 
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, AlarmReciever::class.java)
         val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,

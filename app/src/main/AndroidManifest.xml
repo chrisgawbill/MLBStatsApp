@@ -13,23 +13,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MlbStatsApp"
+        android:theme="@style/SplashScreen"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name="com.example.mlbstatsapp.Activities.SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:exported="true" >
+            android:name=".Activities.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MlbStatsApp"
+            android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".Activities.MainActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustPan|adjustResize">
         </activity>
 
         <receiver android:name="com.example.mlbstatsapp.AlarmReciever" />

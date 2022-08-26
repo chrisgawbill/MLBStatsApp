@@ -128,4 +128,19 @@ class MainViewModel(context: Context):ViewModel() {
             }
         })
     }
+    /**
+     * This updates the pitching stats for the passed in playerID in DB
+     * This only occurs when alarmReciever detects a stat has changed
+     */
+    fun updatePitchingStats(id:String, era:String, wins:String, losses:String){
+        db.updatePitchingStats(id, era, wins, losses)
+    }
+
+    /**
+     * This updates the batter stats for the passed in playerID in DB
+     * This only occurs when alarmReciever detects a stat has chagned
+     */
+    fun updateBatterStats(id:String, hr:String, rbi:String, ba:String){
+        db.updateBatterStats(id, hr, rbi, ba)
+    }
 }

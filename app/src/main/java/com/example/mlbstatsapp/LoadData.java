@@ -17,6 +17,9 @@ import com.example.mlbstatsapp.database.Batter;
 import com.example.mlbstatsapp.database.Pitcher;
 import com.example.mlbstatsapp.database.Player;
 import com.example.mlbstatsapp.database.Team;
+import com.example.mlbstatsapp.database.User;
+import com.example.mlbstatsapp.database.UserWithTeams;
+import com.example.mlbstatsapp.database.UserWithTeamsDao;
 //import com.example.mlbstatsapp.di.AppComponent;
 //import com.example.mlbstatsapp.di.AppModule;
 
@@ -279,6 +282,7 @@ public class LoadData extends AppCompatActivity {
     }
     public void insertBatter(Batter batter){appDb.getBatterDao().insertBatter(batter);}
     public void deleteBatter(String id){appDb.getBatterDao().deleteBatter(id);}
+    public void updateBatterStats(String id, String hr, String rbi, String ba){appDb.getBatterDao().updateHittingStats(id,hr,rbi,ba);}
     public Pitcher getPitcher(String id){
         return appDb.getPitcherDao().findPitcher(id);
     }
@@ -287,6 +291,45 @@ public class LoadData extends AppCompatActivity {
     }
     public void insertPitcher(Pitcher pitcher){appDb.getPitcherDao().insertPitcher(pitcher);}
     public void deletePitcher(String id){appDb.getPitcherDao().deletePitcher(id);}
+    public void updatePitchingStats(String id, String era, String wins, String losses){appDb.getPitcherDao().updatePitchingStats(id,era,wins,losses);}
+
+    public Team selectTeam(String teamName){return appDb.getTeamDao().selectTeam(teamName);}
+    public List<Team> getTeamList(){return appDb.getTeamDao().getTeamList();}
+    public List<UserWithTeams> getUsersandTeams(Integer userID){return appDb.getUserWithTeamsDao().getUsersAndTeams(userID);}
+    public void insertUsersAndTeams(UserWithTeams userWithTeams){appDb.getUserWithTeamsDao().insert(userWithTeams);}
+    public void deleteUserWithTeams(UserWithTeams userWithTeams){appDb.getUserWithTeamsDao().delete(userWithTeams);}
+    public UserWithTeams getUserWithTeams(Integer userID, String teamID){return appDb.getUserWithTeamsDao().getUserTeam(userID, teamID);}
+
+    //Method only being used for development purposes.  Upon deployment, a real user will be included from logging into the application.
+    public User createTestUserAndInsertFavoriteTeams(){
+
+        User user= appDb.getUserDao().getUserByUsername("KenM66");
 
 
+
+        if(user==null) {
+            user = new User("KenM66", "Kenneth", "Milota", "kenm661@gmail.com");
+
+            appDb.getUserDao().insertUser(user);
+
+            user= appDb.getUserDao().getUserByUsername("KenM66");
+
+            Team team1= appDb.getTeamDao().selectTeamByName("Guardians");
+            Team team2= appDb.getTeamDao().selectTeamByName("Rangers");
+
+            User retrievedUser= appDb.getUserDao().getUserByUsername(user.getUsername());
+
+            UserWithTeams userWithTeams= new UserWithTeams(retrievedUser.getId(), team1.getId());
+            UserWithTeams userWithTeams2= new UserWithTeams(retrievedUser.getId(), team2.getId());
+            appDb.getUserWithTeamsDao().insert(userWithTeams);
+            appDb.getUserWithTeamsDao().insert(userWithTeams2);
+
+
+
+            Log.i("Team ID: ", team1.getId()+ " "+ team1.getName());
+        }
+
+        return user;
+
+    }
 }
