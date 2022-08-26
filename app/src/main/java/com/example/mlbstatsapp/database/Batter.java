@@ -152,4 +152,8 @@ public class Batter implements Player {
     public void setBa(float ba) {
         this.ba = ba;
     }
+
+    public String toString(){
+        return lastName+", "+ firstName;
+    }
 }

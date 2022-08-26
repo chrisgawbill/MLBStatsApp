@@ -21,6 +21,7 @@ import com.example.mlbstatsapp.Fragments.IndividualPlayer
 import com.example.mlbstatsapp.Fragments.PlayerSearchResultsFragment
 import com.example.mlbstatsapp.HomeFragment
 import com.example.mlbstatsapp.HomePlayerSearchSharedViewModel
+import com.example.mlbstatsapp.LoadData
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.MenuItem as MenuItem1
 
@@ -37,6 +38,12 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.mlbstatsapp.R.layout.activity_main)
+
+        val populateDB= LoadData.getInstance(applicationContext)
+        populateDB.insertTeams()
+        populateDB.updateAllTeams()
+
+
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(com.example.mlbstatsapp.R.id.nav_host_fragment) as NavHostFragment

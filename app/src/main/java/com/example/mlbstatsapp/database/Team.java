@@ -4,6 +4,7 @@ package com.example.mlbstatsapp.database;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -30,6 +31,9 @@ public class Team {
     private String division;
     @ColumnInfo(name= "games-back")
     private float gamesBack;
+
+    @Ignore
+    private boolean isTeamFavorite;
 
 
 
@@ -124,5 +128,26 @@ public class Team {
         this.gamesBack = gamesBack;
     }
 
+    public boolean isTeamFavorite() {
+        return isTeamFavorite;
+    }
 
+    public void setTeamFavorite(boolean teamFavorite) {
+        isTeamFavorite = teamFavorite;
+    }
+
+    @Override
+    public String toString() {
+        return location+" "+name+" "+gamesBack+ " "+ streak;
+    }
+
+    @Override
+    public boolean equals(Object o){
+
+
+       if (this.name.equals(((Team) o).getName())){
+           return true;
+       }
+       return false;
+    }
 }

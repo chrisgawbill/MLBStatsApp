@@ -1,10 +1,8 @@
 package com.example.mlbstatsapp;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -17,6 +15,8 @@ import com.example.mlbstatsapp.database.Batter;
 import com.example.mlbstatsapp.database.Pitcher;
 import com.example.mlbstatsapp.database.Player;
 import com.example.mlbstatsapp.database.Team;
+import com.example.mlbstatsapp.database.User;
+import com.example.mlbstatsapp.database.UserWithTeams;
 //import com.example.mlbstatsapp.di.AppComponent;
 //import com.example.mlbstatsapp.di.AppModule;
 
@@ -25,7 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -41,9 +40,20 @@ public class LoadData extends AppCompatActivity {
 
 
 
+
     private  Context context;
 
-    private AppDatabase appDb;// appDb= Room.databaseBuilder(context, AppDatabase.class, "mlb-stats").allowMainThreadQueries().build();
+    public User getUser() {
+        return userLoggedIn;
+    }
+
+    public void setUser(User user) {
+        this.userLoggedIn = user;
+    }
+
+    private User userLoggedIn;
+
+    public static AppDatabase appDb;// appDb= Room.databaseBuilder(context, AppDatabase.class, "mlb-stats").allowMainThreadQueries().build();
 
     private LoadData(Context context){
 
@@ -115,10 +125,10 @@ public class LoadData extends AppCompatActivity {
 
                                 switch(leagueAbbrev){
                                     case "AL":
-                                        league= "American League";
+                                        league= "AL";
                                         break;
                                     case "NL":
-                                        league= "National League";
+                                        league= "NL";
                                         break;
                                     default:
                                         //This should never happen unless there is an error reading the JSON string.  Inserted only for non-null purposes
@@ -161,7 +171,11 @@ public class LoadData extends AppCompatActivity {
 
 
 
-                        } catch (JSONException e) {
+                            }
+
+
+
+                         catch (JSONException e) {
                             e.printStackTrace();
                         }
 
@@ -287,6 +301,47 @@ public class LoadData extends AppCompatActivity {
     }
     public void insertPitcher(Pitcher pitcher){appDb.getPitcherDao().insertPitcher(pitcher);}
     public void deletePitcher(String id){appDb.getPitcherDao().deletePitcher(id);}
+
+
+    //Method only being used for development purposes.  Upon deployment, a real user will be included from logging into the application.
+    public static User createTestUserAndInsertFavoriteTeams(){
+
+        User user= appDb.getUserDao().getUserByUsername("KenM66");
+
+
+
+        if(user==null) {
+            user = new User("KenM66", "Kenneth", "Milota", "kenm661@gmail.com");
+
+            appDb.getUserDao().insertUser(user);
+
+            user= appDb.getUserDao().getUserByUsername("KenM66");
+
+            Team team1= appDb.getTeamDao().selectTeamByName("Guardians");
+            Team team2= appDb.getTeamDao().selectTeamByName("Rangers");
+
+            User retrievedUser= appDb.getUserDao().getUserByUsername(user.getUsername());
+
+            UserWithTeams userWithTeams= new UserWithTeams(retrievedUser.getId(), team1.getId());
+            UserWithTeams userWithTeams2= new UserWithTeams(retrievedUser.getId(), team2.getId());
+            appDb.getUserWithTeamsDao().insert(userWithTeams);
+            appDb.getUserWithTeamsDao().insert(userWithTeams2);
+
+
+
+            Log.i("Team ID: ", team1.getId()+ " "+ team1.getName());
+        }
+
+        return user;
+
+    }
+
+
+
+
+    //Used only for testing purposes.   Method calls to this will be removed upon deployment.
+
+
 
 
 }

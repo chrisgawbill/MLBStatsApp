@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/individualTeamStats"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context="com.example.mlbstatsapp.Fragments.IndividualTeamFragment">
+
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/red_border_no_rounding"
+        android:layout_marginTop="126dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewLocation"
+                android:layout_width="159dp"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Team Location"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:textColor="@color/white"
+                android:background="@drawable/red_border_no_rounding"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="Team Name"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewLeague"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="134dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="AL " />
+
+            <TextView
+                android:id="@+id/textViewDivision"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="84dp"
+                android:layout_height="wrap_content"
+                android:text="Division" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewRecordLabel"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Record:" />
+
+
+            <TextView
+                android:id="@+id/textViewRecord"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="99-99" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewWinPctLabel"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="PCT:" />
+
+            <TextView
+                android:id="@+id/textViewPct"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=".396" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewStreakLabel"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Streak:" />
+
+            <TextView
+                android:id="@+id/textViewStreak"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20W" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewGamesBackLabel"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Games Back:" />
+
+            <TextView
+                android:id="@+id/textViewGamesBack"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.5" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewLastTenLabel"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Last Ten:" />
+
+            <TextView
+                android:id="@+id/textViewLastTen"
+                android:background="@drawable/red_border_no_rounding"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0-10" />
+        </TableRow>
+
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/textViewStatsLabel"
+        android:background="@drawable/red_border_no_rounding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:text="Team Stats"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
