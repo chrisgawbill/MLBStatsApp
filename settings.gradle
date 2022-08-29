@@ -1,0 +1,20 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        maven{url "https://jetpack.io"}
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        maven{url "https://jetpack.io"}
+        maven { url 'https://maven.google.com'}
+    }
+}
+rootProject.name = "MlbStatsApp"
+include ':app', ':android-networking'

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/nav_home"
+        android:title="@string/nav_home"/>
+    <item
+        android:id="@+id/teamsListFragment"
+        android:icon="@drawable/nav_team_list"
+        android:title="@string/nav_teams"/>
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/nav_settings"
+        android:title="@string/nav_settings"/>
+</menu>

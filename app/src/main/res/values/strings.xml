@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MlbStatsApp</string>
+    <string name="search_for_player">Search For Player</string>
+    <string name="search">Search</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_teams">Teams</string>
+    <string name="nav_settings">Settings</string>
+    <string name="mlb_stats">MLB Stats</string>
+</resources>
