@@ -91,7 +91,7 @@ class TeamsListViewModel(activity: FragmentActivity?): ViewModel() {
             })
             */
 
-            teamList.sortedWith(compareBy<Team> { it.location }.thenBy { it.name })
+           // teamList.sortedWith(compareBy<Team> { it.location }.thenBy { it.name })
 
             return teamList as ArrayList<Team>
         }
